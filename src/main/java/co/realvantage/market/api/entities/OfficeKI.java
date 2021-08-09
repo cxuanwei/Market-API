@@ -13,13 +13,13 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="OfficeKeyIndicators")
-public class OfficeKeyIndicators {
+@Table(name="OfficeKI")
+public class OfficeKI {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
-	private long keyindicatorset_id;
+	private long id;
 	
 	@Column(name="quarter")
 	private long quarter;
@@ -35,6 +35,9 @@ public class OfficeKeyIndicators {
 	
 	@Column(name="suburb")
 	private String suburb;
+	
+	@Column(name="grade")
+	private String grade;
 
 	@Column(name="rental_grossface_low")
 	private long rental_grossface_low;
