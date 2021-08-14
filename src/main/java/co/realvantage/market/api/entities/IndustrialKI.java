@@ -39,6 +39,16 @@ public class IndustrialKI {
 	@Column(name="grade")
 	private String grade;
 
+	@Column(name="indicator")
+	private String indicator;
+	
+	@Column(name="low")
+	private double low;
+	
+	@Column(name="high")
+	private double high;
+
+	/*
 	@Column(name="rental_net_face_low")
 	private long rental_net_face_low;
 	
@@ -86,4 +96,5 @@ public class IndustrialKI {
 	
 	@Column(name="land_values_10000_50000_high")
 	private float land_values_10000_50000_high;
+	*/
 }

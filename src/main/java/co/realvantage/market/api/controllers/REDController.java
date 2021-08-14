@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import co.realvantage.market.api.entities.RetailED;
+import co.realvantage.market.api.entities.RetailKD;
 import co.realvantage.market.api.respositories.RetailEDRepository;
 
 @RestController
@@ -23,15 +23,15 @@ public class REDController {
 	
 	@GetMapping("/RED")
 	@CrossOrigin(origins="*")
-	public Page<RetailED> getAll(Pageable pageable)	{
+	public Page<RetailKD> getAll(Pageable pageable)	{
 		return _REDRespository.findAll(pageable);
 	}
 	
 	@PostMapping("/RED")
 	@CrossOrigin(origins="*")
-	public ResponseEntity<RetailED> create(@Validated @RequestBody RetailED red)	{
+	public ResponseEntity<RetailKD> create(@Validated @RequestBody RetailKD red)	{
 		 try {
-			 RetailED _red = _REDRespository.save(red);
+			 RetailKD _red = _REDRespository.save(red);
 		      return new ResponseEntity<>(_red, HttpStatus.CREATED);
 		    } catch (Exception e) {
 		      return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);

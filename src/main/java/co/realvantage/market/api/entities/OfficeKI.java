@@ -38,7 +38,18 @@ public class OfficeKI {
 	
 	@Column(name="grade")
 	private String grade;
+	
+	@Column(name="indicator")
+	private String indicator;
+	
+	@Column(name="low")
+	private double low;
+	
+	@Column(name="high")
+	private double high;
+	
 
+    /*
 	@Column(name="rental_grossface_low")
 	private long rental_grossface_low;
 	
@@ -110,5 +121,5 @@ public class OfficeKI {
 	
 	@Column(name="office_captial_values_high")
 	private long office_captial_values_high;
-	
+	*/
 }

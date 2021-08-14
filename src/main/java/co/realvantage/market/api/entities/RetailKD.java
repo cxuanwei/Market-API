@@ -13,8 +13,8 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="RetailED")
-public class RetailED {
+@Table(name="RetailKD")
+public class RetailKD {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,7 +35,14 @@ public class RetailED {
 	
 	@Column(name="suburb")
 	private String suburb;
+	
+	@Column(name="driver")
+	private String driver;
+	
+	@Column(name="value")
+	private double value;
 
+	/*
 	@Column(name="gdp_sfd_growth")
 	private long gdp_sfd_growth;
 	
@@ -71,4 +78,5 @@ public class RetailED {
 	
 	@Column(name="retail_trade_growth_cafes")
 	private double retail_trade_growth_cafes;
+	*/
 }

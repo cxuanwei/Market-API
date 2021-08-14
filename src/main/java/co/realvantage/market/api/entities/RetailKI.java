@@ -39,6 +39,16 @@ public class RetailKI {
 	@Column(name="grade")
 	private String grade;
 
+	@Column(name="indicator")
+	private String indicator;
+	
+	@Column(name="low")
+	private double low;
+	
+	@Column(name="high")
+	private double high;
+	
+	/*
 	@Column(name="dept_store_rent_gross_low")
 	private long dept_store_rent_gross_low;
 	
@@ -104,4 +114,5 @@ public class RetailKI {
 	
 	@Column(name="captial_values_high")
 	private long captial_values_high;
+	*/
 }

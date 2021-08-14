@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import co.realvantage.market.api.entities.ResidentialMR;
+import co.realvantage.market.api.entities.ResidentialKD;
 import co.realvantage.market.api.respositories.ResidentialMRRepository;
 
 @RestController
@@ -23,15 +23,15 @@ public class ResidentialMRController {
 	
 	@GetMapping("/RetailMR")
 	@CrossOrigin(origins="*")
-	public Page<ResidentialMR> getAll(Pageable pageable)	{
+	public Page<ResidentialKD> getAll(Pageable pageable)	{
 		return _RMRRespository.findAll(pageable);
 	}
 	
 	@PostMapping("/RetailMR")
 	@CrossOrigin(origins="*")
-	public ResponseEntity<ResidentialMR> create(@Validated @RequestBody ResidentialMR ki)	{
+	public ResponseEntity<ResidentialKD> create(@Validated @RequestBody ResidentialKD ki)	{
 		 try {
-			 ResidentialMR _officeKeyIndicators = _RMRRespository.save(ki);
+			 ResidentialKD _officeKeyIndicators = _RMRRespository.save(ki);
 		      return new ResponseEntity<>(_officeKeyIndicators, HttpStatus.CREATED);
 		    } catch (Exception e) {
 		      return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);

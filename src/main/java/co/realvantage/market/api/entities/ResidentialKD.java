@@ -13,8 +13,8 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="ResidentialMR")
-public class ResidentialMR {
+@Table(name="ResidentialKD")
+public class ResidentialKD {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,7 +35,14 @@ public class ResidentialMR {
 	
 	@Column(name="suburb")
 	private String suburb;
+	
+	@Column(name="driver")
+	private String driver;
+	
+	@Column(name="value")
+	private double value;
 
+	/*
 	@Column(name="median_value_house")
 	private long median_value_house;
 	
@@ -83,4 +90,5 @@ public class ResidentialMR {
 		
 	@Column(name="rental_growth_annual_apartment")
 	private double rental_growth_annual_apartment;
+	*/
 }

@@ -35,7 +35,20 @@ public class ResidentialKI {
 	
 	@Column(name="suburb")
 	private String suburb;
+	
+	@Column(name="grade")
+	private String grade;
 
+	@Column(name="indicator")
+	private String indicator;
+	
+	@Column(name="low")
+	private double low;
+	
+	@Column(name="high")
+	private double high;
+	
+	/*
 	@Column(name="population")
 	private long population;
 	
@@ -104,4 +117,5 @@ public class ResidentialKI {
 	
 	@Column(name="rents_apartment")
 	private double rents_apartment;
+	*/
 }

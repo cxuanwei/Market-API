@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import co.realvantage.market.api.entities.IndustrialED;
+import co.realvantage.market.api.entities.IndustrialKD;
 import co.realvantage.market.api.respositories.IndustrialEDRepository;
 
 @RestController
@@ -23,15 +23,15 @@ public class IndustrialEDController {
 	
 	@GetMapping("/IndustrialED")
 	@CrossOrigin(origins="*")
-	public Page<IndustrialED> getAll(Pageable pageable)	{
+	public Page<IndustrialKD> getAll(Pageable pageable)	{
 		return _industrialEDRepository.findAll(pageable);
 	}
 	
 	@PostMapping("/IndustrialED")
 	@CrossOrigin(origins="*")
-	public ResponseEntity<IndustrialED> create(@Validated @RequestBody IndustrialED ed)	{
+	public ResponseEntity<IndustrialKD> create(@Validated @RequestBody IndustrialKD ed)	{
 		 try {
-			 IndustrialED _ed = _industrialEDRepository.save(ed);
+			 IndustrialKD _ed = _industrialEDRepository.save(ed);
 		      return new ResponseEntity<>(_ed, HttpStatus.CREATED);
 		    } catch (Exception e) {
 		      return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);

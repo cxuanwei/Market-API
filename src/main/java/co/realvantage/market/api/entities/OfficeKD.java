@@ -13,8 +13,8 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="OfficeMR")
-public class OfficeMR {
+@Table(name="OfficeKD")
+public class OfficeKD {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,8 +35,14 @@ public class OfficeMR {
 	
 	@Column(name="suburb")
 	private String suburb;
+	
+	@Column(name="driver")
+	private String driver;
+	
+	@Column(name="value")
+	private double value;
 
-	@Column(name="total_stock")
+	/*@Column(name="total_stock")
 	private long total_stock;
 	
 	@Column(name="total_vacancy")
@@ -62,5 +68,5 @@ public class OfficeMR {
 		
 	@Column(name="netAdditions_precent")
 	private double netAdditions_precent;
-	
+	*/
 }

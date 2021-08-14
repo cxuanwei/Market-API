@@ -13,8 +13,8 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="IndustrialED")
-public class IndustrialED {
+@Table(name="IndustrialKD")
+public class IndustrialKD {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,7 +35,14 @@ public class IndustrialED {
 	
 	@Column(name="suburb")
 	private String suburb;
-
+	
+	@Column(name="driver")
+	private String driver;
+	
+	@Column(name="value")
+	private double value;
+	
+	/*
 	@Column(name="gdp_sfd_growth")
 	private long gdp_sfd_growth;
 	
@@ -71,4 +78,5 @@ public class IndustrialED {
 	
 	@Column(name="earnings_growth")
 	private double earnings_growth;
+	*/
 }
