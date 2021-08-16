@@ -14,66 +14,66 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import co.realvantage.market.api.entities.OfficeKD;
-import co.realvantage.market.api.entities.OfficeKI;
-import co.realvantage.market.api.services.OfficeService;
+import co.realvantage.market.api.entities.IndustrialKD;
+import co.realvantage.market.api.entities.IndustrialKI;
+import co.realvantage.market.api.services.IndustrialService;
 
 @RestController
-public class OfficeController {
+public class IndustrialController {
 	@Autowired	
-	OfficeService _Service;
+	IndustrialService _Service;
 	
-	@GetMapping("/OfficeKI")
+	@GetMapping("/IndustrialKI")
 	@CrossOrigin(origins="*")
-	public Page<OfficeKI> getAllKeyIndicators(Pageable pageable)	{
+	public Page<IndustrialKI> getAllKeyIndicators(Pageable pageable)	{
 		return _Service.findAllKeyIndicators(pageable);
 	}
 	
-	@PostMapping("/OfficeKI")
+	@PostMapping("/IndustrialKI")
 	@CrossOrigin(origins="*")
-	public ResponseEntity<OfficeKI> create(@Validated @RequestBody OfficeKI ki)	{
+	public ResponseEntity<IndustrialKI> create(@Validated @RequestBody IndustrialKI ki)	{
 		 try {
-			 OfficeKI _KeyIndicator = _Service.createKeyIndicator(ki);
+			 IndustrialKI _KeyIndicator = _Service.createKeyIndicator(ki);
 		      return new ResponseEntity<>(_KeyIndicator, HttpStatus.CREATED);
 		    } catch (Exception e) {
 		      return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		    }
 	}
 	
-	@PostMapping("/OfficeKIs")
+	@PostMapping("/IndustrialKIs")
 	@CrossOrigin(origins="*")
-	public ResponseEntity<List<OfficeKI>> createKIs(@RequestBody List<OfficeKI> kis)	{
+	public ResponseEntity<List<IndustrialKI>> createOfficeKIs(@RequestBody List<IndustrialKI> kis)	{
 		 try {
 			 kis.stream().forEach(c->_Service.createKeyIndicator(c));
-		      return new ResponseEntity<List<OfficeKI>>(kis, HttpStatus.CREATED);
+		      return new ResponseEntity<List<IndustrialKI>>(kis, HttpStatus.CREATED);
 		    } catch (Exception e) {
 		      return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		    }
 	}	
 	
-	@GetMapping("/OfficeKD")
+	@GetMapping("/IndustrialKD")
 	@CrossOrigin(origins="*")
-	public Page<OfficeKD> getAll(Pageable pageable)	{
+	public Page<IndustrialKD> getAll(Pageable pageable)	{
 		return _Service.findAllKeyDrivers(pageable);
 	}
 	
-	@PostMapping("/OfficeKD")
+	@PostMapping("/IndustrialKD")
 	@CrossOrigin(origins="*")
-	public ResponseEntity<OfficeKD> create(@Validated @RequestBody OfficeKD ki)	{
+	public ResponseEntity<IndustrialKD> create(@Validated @RequestBody IndustrialKD ki)	{
 		 try {
-			 OfficeKD _KeyDriver = _Service.createKeyDriver(ki);
+			 IndustrialKD _KeyDriver = _Service.createKeyDriver(ki);
 		      return new ResponseEntity<>(_KeyDriver, HttpStatus.CREATED);
 		    } catch (Exception e) {
 		      return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		    }
 	}
 
-	@PostMapping("/OfficeKDs")
+	@PostMapping("/IndustrialKDs")
 	@CrossOrigin(origins="*")
-	public ResponseEntity<List<OfficeKD>> createKDs(@RequestBody List<OfficeKD> kds)	{
+	public ResponseEntity<List<IndustrialKD>> createOfficeKDs(@RequestBody List<IndustrialKD> officekds)	{
 		 try {
-			 kds.stream().forEach(c->_Service.createKeyDriver(c));
-		      return new ResponseEntity<List<OfficeKD>>(kds, HttpStatus.CREATED);
+			 officekds.stream().forEach(c->_Service.createKeyDriver(c));
+		      return new ResponseEntity<List<IndustrialKD>>(officekds, HttpStatus.CREATED);
 		    } catch (Exception e) {
 		      return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		    }

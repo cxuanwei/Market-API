@@ -8,26 +8,26 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import co.realvantage.market.api.respositories.OfficeKIRepository;
-import co.realvantage.market.api.entities.OfficeKD;
-import co.realvantage.market.api.entities.OfficeKI;
-import co.realvantage.market.api.respositories.OfficeKDRepository;
+import co.realvantage.market.api.respositories.ResidentialKIRepository;
+import co.realvantage.market.api.entities.ResidentialKD;
+import co.realvantage.market.api.respositories.ResidentialKDRepository;
 
 @Service
-public class OfficeServiceImpl implements OfficeService{
+public class ResidentialServiceImpl implements ResidentialService{
 	@Autowired
-	OfficeKIRepository _kiRepository;
+	ResidentialKIRepository _kiRepository;
 	
 	@Autowired
-	OfficeKDRepository _kdRepository;
+	ResidentialKDRepository _kdRepository;
 
+	/*
 	@Override
-	public OfficeKI createKeyIndicator(OfficeKI _ki) {
+	public ResidentialKI createKeyIndicator(ResidentialKI _ki) {
 		// TODO Auto-generated method stub
 		
 		//Check whether record exist
-		OfficeKI ki=findAllKeyIndicatorsByQuarterAndLocationAndIndicatorAndGrade(_ki.getQuarter(),_ki.getYear(),
-				_ki.getCountry(),_ki.getState(),_ki.getSuburb(),_ki.getIndicator(),_ki.getGrade());
+		ResidentialKI ki=findAllKeyIndicatorsByQuarterAndLocationAndIndicatorAndGrade(_ki.getQuarter(),_ki.getYear(),
+				_ki.getCountry(),_ki.getState(),_ki.getState(), _ki.getIndicator(), _ki.getGrade());
 		if(ki!=null)	{
 			_ki.setId(ki.getId());
 		}
@@ -37,7 +37,7 @@ public class OfficeServiceImpl implements OfficeService{
 	}
 
 	@Override
-	public void updateKeyIndicator(OfficeKI _ki) throws Exception {
+	public void updateKeyIndicator(ResidentialKI _ki) throws Exception {
 		// TODO Auto-generated method stub
 		if(_ki.getId()<=0)
 			throw new Exception("Invalid ID!");
@@ -52,30 +52,31 @@ public class OfficeServiceImpl implements OfficeService{
 	}
 
 	@Override
-	public Collection<OfficeKI> findAllKeyIndicators() {
+	public Collection<ResidentialKI> findAllKeyIndicators() {
 		// TODO Auto-generated method stub
 		return _kiRepository.findAll();
 	}
 	
 	@Override
-	public Page<OfficeKI> findAllKeyIndicators(Pageable _pageable) {
+	public Page<ResidentialKI> findAllKeyIndicators(Pageable _pageable) {
 		// TODO Auto-generated method stub
 		return _kiRepository.findAll(_pageable);
 	}
 
 
 	@Override
-	public OfficeKI findAllKeyIndicatorsByQuarterAndLocationAndIndicatorAndGrade(long _quarter, Year _year, String _country, String _state, String _suburb, String _indicator, String _grade) {
+	public ResidentialKI findAllKeyIndicatorsByQuarterAndLocationAndIndicatorAndGrade(long _quarter, Year _year, String _country, String _state, String _suburb, String _indicator, String _grade) {
 		// TODO Auto-generated method stub
 		return _kiRepository.findByTimePeriodAndLocationAndIndicatorAndGrade(_quarter, _year, _country, _state, _suburb, _indicator, _grade);
 	}
+	*/
 
 	@Override
-	public OfficeKD createKeyDriver(OfficeKD _kd) {
+	public ResidentialKD createKeyDriver(ResidentialKD _kd) {
 		// TODO Auto-generated method stub
 		
 		//Check whether record exist
-		OfficeKD kd=_kdRepository.findByTimePeriodAndLocationAndDriver(_kd.getQuarter(),_kd.getYear(),
+		ResidentialKD kd=_kdRepository.findByTimePeriodAndLocationAndDriver(_kd.getQuarter(),_kd.getYear(),
 				_kd.getCountry(),_kd.getState(),_kd.getSuburb(),_kd.getDriver());
 		if(kd!=null)	{
 			_kd.setId(kd.getId());
@@ -86,7 +87,7 @@ public class OfficeServiceImpl implements OfficeService{
 	}
 
 	@Override
-	public void updateKeyDriver(OfficeKD _kd) throws Exception {
+	public void updateKeyDriver(ResidentialKD _kd) throws Exception {
 		// TODO Auto-generated method stub
 		if(_kd.getId()==0)
 			throw new Exception("Invalid ID!");
@@ -100,19 +101,19 @@ public class OfficeServiceImpl implements OfficeService{
 	}	
 
 	@Override
-	public Collection<OfficeKD> findAllKeyDrivers() {
+	public Collection<ResidentialKD> findAllKeyDrivers() {
 		// TODO Auto-generated method stub
 		return _kdRepository.findAll();
 	}
 
 	@Override
-	public Page<OfficeKD> findAllKeyDrivers(Pageable _pageable) {
+	public Page<ResidentialKD> findAllKeyDrivers(Pageable _pageable) {
 		// TODO Auto-generated method stub
 		return _kdRepository.findAll(_pageable);
 	}
 
 	@Override
-	public OfficeKD findAllKeyDriversByQuarterAndLocationAndDriver(long _quarter, Year _year, String _country,
+	public ResidentialKD findAllKeyDriversByQuarterAndLocationAndDriver(long _quarter, Year _year, String _country,
 			String _state, String _suburb, String _driver) {
 		// TODO Auto-generated method stub
 		return _kdRepository.findByTimePeriodAndLocationAndDriver(_quarter, _year, _country, _state, _suburb, _driver);
