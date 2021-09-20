@@ -8,14 +8,15 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import co.realvantage.market.api.respositories.ResidentialKIRepository;
+//import co.realvantage.market.api.respositories.ResidentialKIRepository;
+import co.realvantage.market.api.entities.Residential;
 import co.realvantage.market.api.entities.ResidentialKD;
 import co.realvantage.market.api.respositories.ResidentialKDRepository;
 
 @Service
 public class ResidentialServiceImpl implements ResidentialService{
-	@Autowired
-	ResidentialKIRepository _kiRepository;
+	//@Autowired
+	//ResidentialKIRepository _kiRepository;
 	
 	@Autowired
 	ResidentialKDRepository _kdRepository;
@@ -117,6 +118,14 @@ public class ResidentialServiceImpl implements ResidentialService{
 			String _state, String _suburb, String _driver) {
 		// TODO Auto-generated method stub
 		return _kdRepository.findByTimePeriodAndLocationAndDriver(_quarter, _year, _country, _state, _suburb, _driver);
+	}
+	
+	@Override
+	public Residential findAllDriversAndIndicators()	{
+		Residential _residential = new Residential();
+		_residential.setKdList(_kdRepository.findAll());
+		//_retail.setKiList(_kiRepository.findAll());
+		return _residential;
 	}
 
 }

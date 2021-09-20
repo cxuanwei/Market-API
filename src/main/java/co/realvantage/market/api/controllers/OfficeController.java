@@ -22,19 +22,19 @@ import co.realvantage.market.api.services.OfficeService;
 @RestController
 public class OfficeController {
 	@Autowired	
-	OfficeService _Service;
+	OfficeService _service;
 	
 	@GetMapping("/OfficeKI")
 	@CrossOrigin(origins="*")
 	public Page<OfficeKI> getAllKeyIndicators(Pageable pageable)	{
-		return _Service.findAllKeyIndicators(pageable);
+		return _service.findAllKeyIndicators(pageable);
 	}
 	
 	@PostMapping("/OfficeKI")
 	@CrossOrigin(origins="*")
 	public ResponseEntity<OfficeKI> create(@Validated @RequestBody OfficeKI ki)	{
 		 try {
-			 OfficeKI _KeyIndicator = _Service.createKeyIndicator(ki);
+			 OfficeKI _KeyIndicator = _service.createKeyIndicator(ki);
 		      return new ResponseEntity<>(_KeyIndicator, HttpStatus.CREATED);
 		    } catch (Exception e) {
 		      return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -45,7 +45,7 @@ public class OfficeController {
 	@CrossOrigin(origins="*")
 	public ResponseEntity<List<OfficeKI>> createKIs(@RequestBody List<OfficeKI> kis)	{
 		 try {
-			 kis.stream().forEach(c->_Service.createKeyIndicator(c));
+			 kis.stream().forEach(c->_service.createKeyIndicator(c));
 		      return new ResponseEntity<List<OfficeKI>>(kis, HttpStatus.CREATED);
 		    } catch (Exception e) {
 		      return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -55,14 +55,14 @@ public class OfficeController {
 	@GetMapping("/OfficeKD")
 	@CrossOrigin(origins="*")
 	public Page<OfficeKD> getAll(Pageable pageable)	{
-		return _Service.findAllKeyDrivers(pageable);
+		return _service.findAllKeyDrivers(pageable);
 	}
 	
 	@PostMapping("/OfficeKD")
 	@CrossOrigin(origins="*")
 	public ResponseEntity<OfficeKD> create(@Validated @RequestBody OfficeKD ki)	{
 		 try {
-			 OfficeKD _KeyDriver = _Service.createKeyDriver(ki);
+			 OfficeKD _KeyDriver = _service.createKeyDriver(ki);
 		      return new ResponseEntity<>(_KeyDriver, HttpStatus.CREATED);
 		    } catch (Exception e) {
 		      return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -73,7 +73,7 @@ public class OfficeController {
 	@CrossOrigin(origins="*")
 	public ResponseEntity<List<OfficeKD>> createKDs(@RequestBody List<OfficeKD> kds)	{
 		 try {
-			 kds.stream().forEach(c->_Service.createKeyDriver(c));
+			 kds.stream().forEach(c->_service.createKeyDriver(c));
 		      return new ResponseEntity<List<OfficeKD>>(kds, HttpStatus.CREATED);
 		    } catch (Exception e) {
 		      return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -86,11 +86,11 @@ public class OfficeController {
 		 try {
 			 List<OfficeKI> kiList = ofc.getKiList();
 			 if(kiList!=null)
-				 kiList.stream().forEach(c->_Service.createKeyIndicator(c));
+				 kiList.stream().forEach(c->_service.createKeyIndicator(c));
 			 
 			 List <OfficeKD> kdList = ofc.getKdList();
 			 if(kdList!=null)
-				 kdList.stream().forEach(c->_Service.createKeyDriver(c));
+				 kdList.stream().forEach(c->_service.createKeyDriver(c));
 			 
 		      return new ResponseEntity<Office>(ofc, HttpStatus.CREATED);
 		    } catch (Exception e) {
@@ -101,7 +101,8 @@ public class OfficeController {
 	@GetMapping("/Office")
 	@CrossOrigin(origins="*")
 	public ResponseEntity<Office> getOffices()	{
-		return new ResponseEntity<Office>(new Office(),HttpStatus.ACCEPTED);
+		//return new ResponseEntity<Office>(new Office(),HttpStatus.ACCEPTED);
+		return new ResponseEntity<Office>(_service.findAllDriversAndIndicators(), HttpStatus.CREATED);
 	}
 	
 }

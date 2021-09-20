@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import co.realvantage.market.api.respositories.OfficeKIRepository;
+import co.realvantage.market.api.entities.Office;
 import co.realvantage.market.api.entities.OfficeKD;
 import co.realvantage.market.api.entities.OfficeKI;
 import co.realvantage.market.api.respositories.OfficeKDRepository;
@@ -116,6 +117,14 @@ public class OfficeServiceImpl implements OfficeService{
 			String _state, String _suburb, String _driver) {
 		// TODO Auto-generated method stub
 		return _kdRepository.findByTimePeriodAndLocationAndDriver(_quarter, _year, _country, _state, _suburb, _driver);
+	}
+	
+	@Override
+	public Office findAllDriversAndIndicators()	{
+		Office _office = new Office();
+		_office.setKdList(_kdRepository.findAll());
+		_office.setKiList(_kiRepository.findAll());
+		return _office;
 	}
 
 }

@@ -6,6 +6,7 @@ import java.util.Collection;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import co.realvantage.market.api.entities.Industrial;
 import co.realvantage.market.api.entities.IndustrialKD;
 import co.realvantage.market.api.entities.IndustrialKI;
 
@@ -25,4 +26,5 @@ public interface IndustrialService {
 	public abstract Page<IndustrialKD> findAllKeyDrivers(Pageable pageable);
 	public abstract IndustrialKD findAllKeyDriversByQuarterAndLocationAndDriver(long _quarter, Year _year, String _country, String _state, String _suburb, String _driver);
 	
+	public abstract Industrial findAllDriversAndIndicators();
 }

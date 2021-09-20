@@ -6,6 +6,7 @@ import java.util.Collection;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import co.realvantage.market.api.entities.Office;
 import co.realvantage.market.api.entities.OfficeKD;
 import co.realvantage.market.api.entities.OfficeKI;
 
@@ -24,5 +25,8 @@ public interface OfficeService {
 	public abstract Collection<OfficeKD> findAllKeyDrivers();
 	public abstract Page<OfficeKD> findAllKeyDrivers(Pageable pageable);
 	public abstract OfficeKD findAllKeyDriversByQuarterAndLocationAndDriver(long _quarter, Year _year, String _country, String _state, String _suburb, String _driver);
+	
+	public abstract Office findAllDriversAndIndicators();
+	//public abstract Page<Office> findAllOfficeDriversAndIndicators(Pageable pageable);
 	
 }

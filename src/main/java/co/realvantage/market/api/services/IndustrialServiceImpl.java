@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import co.realvantage.market.api.respositories.IndustrialKIRepository;
+import co.realvantage.market.api.entities.Industrial;
 import co.realvantage.market.api.entities.IndustrialKD;
 import co.realvantage.market.api.entities.IndustrialKI;
 import co.realvantage.market.api.respositories.IndustrialKDRepository;
@@ -117,5 +118,12 @@ public class IndustrialServiceImpl implements IndustrialService{
 		// TODO Auto-generated method stub
 		return _kdRepository.findByTimePeriodAndLocationAndDriver(_quarter, _year, _country, _state, _suburb, _driver);
 	}
-
+	
+	@Override
+	public Industrial findAllDriversAndIndicators()	{
+		Industrial _industrial = new Industrial();
+		_industrial.setKdList(_kdRepository.findAll());
+		_industrial.setKiList(_kiRepository.findAll());
+		return _industrial;
+	}
 }

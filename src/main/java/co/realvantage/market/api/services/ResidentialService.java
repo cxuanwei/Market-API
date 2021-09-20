@@ -6,6 +6,7 @@ import java.util.Collection;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import co.realvantage.market.api.entities.Residential;
 import co.realvantage.market.api.entities.ResidentialKD;
 
 public interface ResidentialService {
@@ -28,5 +29,7 @@ public interface ResidentialService {
 	public abstract Collection<ResidentialKD> findAllKeyDrivers();
 	public abstract Page<ResidentialKD> findAllKeyDrivers(Pageable pageable);
 	public abstract ResidentialKD findAllKeyDriversByQuarterAndLocationAndDriver(long _quarter, Year _year, String _country, String _state, String _suburb, String _driver);
+	
+	public abstract Residential findAllDriversAndIndicators();
 	
 }

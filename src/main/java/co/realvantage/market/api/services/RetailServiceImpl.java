@@ -10,16 +10,17 @@ import org.springframework.stereotype.Service;
 
 import co.realvantage.market.api.respositories.RetailKDRepository;
 import co.realvantage.market.api.respositories.RetailKIRepository;
+import co.realvantage.market.api.entities.Retail;
 import co.realvantage.market.api.entities.RetailKD;
 import co.realvantage.market.api.entities.RetailKI;
 
 @Service
 public class RetailServiceImpl implements RetailService{
 	@Autowired
-	RetailKIRepository _retailKIRepository;
+	RetailKIRepository _kiRepository;
 	
 	@Autowired
-	RetailKDRepository _retailKDRepository;
+	RetailKDRepository _kdRepository;
 
 	@Override
 	public RetailKI createKeyIndicator(RetailKI _retailKI) {
@@ -33,7 +34,7 @@ public class RetailServiceImpl implements RetailService{
 		}
 		else
 			_retailKI.setId(0);	//ensure id is 0 so that repository will create a new record instead of update
-		return _retailKIRepository.save(_retailKI);
+		return _kiRepository.save(_retailKI);
 	}
 
 	@Override
@@ -41,32 +42,32 @@ public class RetailServiceImpl implements RetailService{
 		// TODO Auto-generated method stub
 		if(_retailKI.getId()<=0)
 			throw new Exception("Invalid ID!");
-		_retailKIRepository.save(_retailKI);
+		_kiRepository.save(_retailKI);
 	}
 
 	@Override
 	public void deleteKeyIndicator(long id) {
 		// TODO Auto-generated method stub
-		_retailKIRepository.deleteById(id);
+		_kiRepository.deleteById(id);
 	}
 
 	@Override
 	public Collection<RetailKI> findAllKeyIndicators() {
 		// TODO Auto-generated method stub
-		return _retailKIRepository.findAll();
+		return _kiRepository.findAll();
 	}
 
 	@Override
 	public Page<RetailKI> findAllKeyIndicators(Pageable pageable) {
 		// TODO Auto-generated method stub
-		return _retailKIRepository.findAll(pageable);
+		return _kiRepository.findAll(pageable);
 	}
 
 	@Override
 	public RetailKI findAllKeyIndicatorsByQuarterAndLocationAndIndicatorAndGrade(long _quarter, Year _year, String _country,
 			String _state, String _suburb, String _indicator, String _grade) {
 		// TODO Auto-generated method stub
-		return _retailKIRepository.findByTimePeriodAndLocationAndIndicatorAndGrade(_quarter, _year, _country, _state, _suburb, _indicator, _grade);
+		return _kiRepository.findByTimePeriodAndLocationAndIndicatorAndGrade(_quarter, _year, _country, _state, _suburb, _indicator, _grade);
 	}
 
 	@Override
@@ -80,7 +81,7 @@ public class RetailServiceImpl implements RetailService{
 		}
 		else
 			_retailKD.setId(0);	//ensure id is 0 so that repository will create a new record instead of update
-		return _retailKDRepository.save(_retailKD);
+		return _kdRepository.save(_retailKD);
 	}
 
 	@Override
@@ -89,32 +90,39 @@ public class RetailServiceImpl implements RetailService{
 		
 		if(_retailD.getId()<=0)
 			throw new Exception("Invalid ID!");
-		_retailKDRepository.save(_retailD);
+		_kdRepository.save(_retailD);
 	}
 
 	@Override
 	public void deleteKeyDriver(long id) {
 		// TODO Auto-generated method stub
-		_retailKDRepository.deleteById(id);
+		_kdRepository.deleteById(id);
 	}
 
 	@Override
 	public Collection<RetailKD> findAllKeyDrivers() {
 		// TODO Auto-generated method stub
-		return _retailKDRepository.findAll();
+		return _kdRepository.findAll();
 	}
 
 	@Override
 	public Page<RetailKD> findAllKeyDrivers(Pageable pageable) {
 		// TODO Auto-generated method stub
-		return _retailKDRepository.findAll(pageable);
+		return _kdRepository.findAll(pageable);
 	}
 
 	@Override
 	public RetailKD findAllKeyDriversByQuarterAndLocationAndDriver(long _quarter, Year _year, String _country,
 			String _state, String _suburb, String _driver) {
 		// TODO Auto-generated method stub
-		return _retailKDRepository.findByTimePeriodAndLocationAndDriver(_quarter, _year, _country, _state, _suburb, _driver);
+		return _kdRepository.findByTimePeriodAndLocationAndDriver(_quarter, _year, _country, _state, _suburb, _driver);
 	}
-
+	
+	@Override
+	public Retail findAllDriversAndIndicators()	{
+		Retail _retail = new Retail();
+		_retail.setKdList(_kdRepository.findAll());
+		_retail.setKiList(_kiRepository.findAll());
+		return _retail;
+	}
 }

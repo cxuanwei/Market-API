@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import co.realvantage.market.api.entities.Retail;
 import co.realvantage.market.api.entities.RetailKD;
 import co.realvantage.market.api.entities.RetailKI;
 import co.realvantage.market.api.services.RetailService;
@@ -21,19 +22,19 @@ import co.realvantage.market.api.services.RetailService;
 @RestController
 public class RetailController {
 	@Autowired	
-	RetailService _retailService;
+	RetailService _service;
 	
 	@GetMapping("/RetailKI")
 	@CrossOrigin(origins="*")
 	public Page<RetailKI> getAllKeyIndicators(Pageable pageable)	{
-		return _retailService.findAllKeyIndicators(pageable);
+		return _service.findAllKeyIndicators(pageable);
 	}
 	
 	@PostMapping("/RetailKI")
 	@CrossOrigin(origins="*")
 	public ResponseEntity<RetailKI> create(@Validated @RequestBody RetailKI ki)	{
 		 try {
-			 RetailKI _KeyIndicator = _retailService.createKeyIndicator(ki);
+			 RetailKI _KeyIndicator = _service.createKeyIndicator(ki);
 		      return new ResponseEntity<>(_KeyIndicator, HttpStatus.CREATED);
 		    } catch (Exception e) {
 		      return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -44,7 +45,7 @@ public class RetailController {
 	@CrossOrigin(origins="*")
 	public ResponseEntity<List<RetailKI>> createKIs(@RequestBody List<RetailKI> kis)	{
 		 try {
-			 kis.stream().forEach(c->_retailService.createKeyIndicator(c));
+			 kis.stream().forEach(c->_service.createKeyIndicator(c));
 		      return new ResponseEntity<List<RetailKI>>(kis, HttpStatus.CREATED);
 		    } catch (Exception e) {
 		      return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -54,14 +55,14 @@ public class RetailController {
 	@GetMapping("/RetailKD")
 	@CrossOrigin(origins="*")
 	public Page<RetailKD> getAll(Pageable pageable)	{
-		return _retailService.findAllKeyDrivers(pageable);
+		return _service.findAllKeyDrivers(pageable);
 	}
 	
 	@PostMapping("/RetailKD")
 	@CrossOrigin(origins="*")
 	public ResponseEntity<RetailKD> create(@Validated @RequestBody RetailKD ki)	{
 		 try {
-			 RetailKD _KeyDriver = _retailService.createKeyDriver(ki);
+			 RetailKD _KeyDriver = _service.createKeyDriver(ki);
 		      return new ResponseEntity<>(_KeyDriver, HttpStatus.CREATED);
 		    } catch (Exception e) {
 		      return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -72,10 +73,35 @@ public class RetailController {
 	@CrossOrigin(origins="*")
 	public ResponseEntity<List<RetailKD>> createKDs(@RequestBody List<RetailKD> kds)	{
 		 try {
-			 kds.stream().forEach(c->_retailService.createKeyDriver(c));
+			 kds.stream().forEach(c->_service.createKeyDriver(c));
 		      return new ResponseEntity<List<RetailKD>>(kds, HttpStatus.CREATED);
 		    } catch (Exception e) {
 		      return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		    }
+	}
+	
+	@PostMapping("/Retails")
+	@CrossOrigin(origins="*")
+	public ResponseEntity<Retail> createIndustrials(@RequestBody Retail _obj)	{
+		 try {
+			 List<RetailKI> kiList = _obj.getKiList();
+			 if(kiList!=null)
+				 kiList.stream().forEach(c->_service.createKeyIndicator(c));
+			 
+			 List <RetailKD> kdList = _obj.getKdList();
+			 if(kdList!=null)
+				 kdList.stream().forEach(c->_service.createKeyDriver(c));
+			 
+		      return new ResponseEntity<Retail>(_obj, HttpStatus.CREATED);
+		    } catch (Exception e) {
+		      return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		    }
+	}
+	
+	@GetMapping("/Retail")
+	@CrossOrigin(origins="*")
+	public ResponseEntity<Retail> getIndustrials()	{
+		//return new ResponseEntity<Industrial>(new Industrial(),HttpStatus.ACCEPTED);
+		return new ResponseEntity<Retail>(_service.findAllDriversAndIndicators(),HttpStatus.ACCEPTED);
 	}
 }
