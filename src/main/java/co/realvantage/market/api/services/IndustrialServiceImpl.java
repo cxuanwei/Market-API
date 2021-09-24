@@ -1,10 +1,14 @@
 package co.realvantage.market.api.services;
 
 import java.time.Year;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -125,5 +129,41 @@ public class IndustrialServiceImpl implements IndustrialService{
 		_industrial.setKdList(_kdRepository.findAll());
 		_industrial.setKiList(_kiRepository.findAll());
 		return _industrial;
+	}
+	
+	@Override
+	public List<IndustrialKI> findKeyIndicatorsBySuburbQuarterYear(String _suburb,Integer _quarter,Year _year)	{
+		if(_suburb!=null&&_quarter!=null&&_year!=null)
+			//_kiRepository.findKeyIndicatorsBySuburbQuarterYear(_quarter.longValue(), _year, _suburb, _page);
+			return _kiRepository.findKeyIndicatorsBySuburbQuarterYear(_quarter.longValue(), _year, _suburb);
+
+		return new ArrayList<IndustrialKI>();	//return any empty list
+		
+	}
+	
+	@Override
+	public Page<IndustrialKI> findKeyIndicatorsBySuburbQuarterYear(String _suburb,Integer _quarter,Year _year, Pageable _page)	{
+		if(_suburb!=null&&_quarter!=null&&_year!=null)
+			return _kiRepository.findKeyIndicatorsBySuburbQuarterYear(_quarter.longValue(), _year, _suburb, _page);
+		return new PageImpl<IndustrialKI>(Collections.emptyList());
+		
+	}
+	
+	@Override
+	public List<IndustrialKD> findKeyDriversByStateQuarterYear(String _state,Integer _quarter,Year _year)	{
+		if(_state!=null&&_quarter!=null&&_year!=null)
+			return _kdRepository.findKeyDriversByStateQuarterYear(_quarter.longValue(), _year, _state);
+
+		return new ArrayList<IndustrialKD>();	//return any empty list
+		
+	}
+	
+	@Override
+	public Page<IndustrialKD> findKeyDriversByStateQuarterYear(String _state,Integer _quarter,Year _year, Pageable _page)	{
+		if(_state!=null&&_quarter!=null&&_year!=null)
+			return _kdRepository.findKeyDriversByStateQuarterYear(_quarter.longValue(), _year, _state, _page);
+		 
+		return new PageImpl<IndustrialKD>(Collections.emptyList());
+		
 	}
 }

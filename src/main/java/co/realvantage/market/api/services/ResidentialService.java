@@ -2,12 +2,14 @@ package co.realvantage.market.api.services;
 
 import java.time.Year;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import co.realvantage.market.api.entities.Residential;
 import co.realvantage.market.api.entities.ResidentialKD;
+import co.realvantage.market.api.entities.RetailKD;
 
 public interface ResidentialService {
 	
@@ -31,5 +33,7 @@ public interface ResidentialService {
 	public abstract ResidentialKD findAllKeyDriversByQuarterAndLocationAndDriver(long _quarter, Year _year, String _country, String _state, String _suburb, String _driver);
 	
 	public abstract Residential findAllDriversAndIndicators();
+	public abstract List<ResidentialKD> findKeyDriversBySuburbQuarterYear(String _suburb,Integer _quarter,Year _year);
+	public abstract Page<ResidentialKD> findKeyDriversBySuburbQuarterYear(String _suburb,Integer _quarter,Year _year, Pageable pageable);
 	
 }

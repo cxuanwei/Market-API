@@ -1,16 +1,21 @@
 package co.realvantage.market.api.services;
 
 import java.time.Year;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 //import co.realvantage.market.api.respositories.ResidentialKIRepository;
 import co.realvantage.market.api.entities.Residential;
 import co.realvantage.market.api.entities.ResidentialKD;
+import co.realvantage.market.api.entities.RetailKI;
 import co.realvantage.market.api.respositories.ResidentialKDRepository;
 
 @Service
@@ -126,6 +131,24 @@ public class ResidentialServiceImpl implements ResidentialService{
 		_residential.setKdList(_kdRepository.findAll());
 		//_retail.setKiList(_kiRepository.findAll());
 		return _residential;
+	}
+	
+	@Override
+	public List<ResidentialKD> findKeyDriversBySuburbQuarterYear(String _suburb,Integer _quarter,Year _year)	{
+		if(_suburb!=null&&_quarter!=null&&_year!=null)
+			//_kiRepository.findKeyIndicatorsBySuburbQuarterYear(_quarter.longValue(), _year, _suburb, _page);
+			return _kdRepository.findKeyDriversBySuburbQuarterYear(_quarter.longValue(), _year, _suburb);
+
+		return new ArrayList<ResidentialKD>();	//return any empty list
+		
+	}
+	
+	@Override
+	public Page<ResidentialKD> findKeyDriversBySuburbQuarterYear(String _suburb,Integer _quarter,Year _year, Pageable _page)	{
+		if(_suburb!=null&&_quarter!=null&&_year!=null)
+			return _kdRepository.findKeyDriversBySuburbQuarterYear(_quarter.longValue(), _year, _suburb, _page);
+		return new PageImpl<ResidentialKD>(Collections.emptyList());
+		
 	}
 
 }

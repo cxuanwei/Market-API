@@ -1,10 +1,14 @@
 package co.realvantage.market.api.services;
 
 import java.time.Year;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +31,7 @@ public class OfficeServiceImpl implements OfficeService{
 		// TODO Auto-generated method stub
 		
 		//Check whether record exist
-		OfficeKI ki=findAllKeyIndicatorsByQuarterAndLocationAndIndicatorAndGrade(_ki.getQuarter(),_ki.getYear(),
+		OfficeKI ki=_kiRepository.findByTimePeriodAndLocationAndIndicatorAndGrade(_ki.getQuarter(),_ki.getYear(),
 				_ki.getCountry(),_ki.getState(),_ki.getSuburb(),_ki.getIndicator(),_ki.getGrade());
 		if(ki!=null)	{
 			_ki.setId(ki.getId());
@@ -125,6 +129,42 @@ public class OfficeServiceImpl implements OfficeService{
 		_office.setKdList(_kdRepository.findAll());
 		_office.setKiList(_kiRepository.findAll());
 		return _office;
+	}
+	
+	@Override
+	public List<OfficeKI> findKeyIndicatorsBySuburbQuarterYear(String _suburb,Integer _quarter,Year _year)	{
+		if(_suburb!=null&&_quarter!=null&&_year!=null)
+			//_kiRepository.findKeyIndicatorsBySuburbQuarterYear(_quarter.longValue(), _year, _suburb, _page);
+			return _kiRepository.findKeyIndicatorsBySuburbQuarterYear(_quarter.longValue(), _year, _suburb);
+
+		return new ArrayList<OfficeKI>();	//return any empty list
+		
+	}
+	
+	@Override
+	public Page<OfficeKI> findKeyIndicatorsBySuburbQuarterYear(String _suburb,Integer _quarter,Year _year, Pageable _page)	{
+		if(_suburb!=null&&_quarter!=null&&_year!=null)
+			return _kiRepository.findKeyIndicatorsBySuburbQuarterYear(_quarter.longValue(), _year, _suburb, _page);
+		return new PageImpl<OfficeKI>(Collections.emptyList());
+		
+	}
+	
+	@Override
+	public List<OfficeKD> findKeyDriversBySuburbQuarterYear(String _suburb,Integer _quarter,Year _year)	{
+		if(_suburb!=null&&_quarter!=null&&_year!=null)
+			return _kdRepository.findKeyDriversBySuburbQuarterYear(_quarter.longValue(), _year, _suburb);
+
+		return new ArrayList<OfficeKD>();	//return any empty list
+		
+	}
+	
+	@Override
+	public Page<OfficeKD> findKeyDriversBySuburbQuarterYear(String _suburb,Integer _quarter,Year _year, Pageable _page)	{
+		if(_suburb!=null&&_quarter!=null&&_year!=null)
+			return _kdRepository.findKeyDriversBySuburbQuarterYear(_quarter.longValue(), _year, _suburb, _page);
+		 
+		return new PageImpl<OfficeKD>(Collections.emptyList());
+		
 	}
 
 }

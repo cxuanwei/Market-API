@@ -1,5 +1,6 @@
 package co.realvantage.market.api.controllers;
 
+import java.time.Year;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +13,12 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.realvantage.market.api.entities.Residential;
 import co.realvantage.market.api.entities.ResidentialKD;
+import co.realvantage.market.api.entities.RetailKI;
 import co.realvantage.market.api.services.ResidentialService;
 
 @RestController
@@ -57,6 +60,17 @@ public class ResidentialController {
 	@CrossOrigin(origins="*")
 	public Page<ResidentialKD> getAll(Pageable pageable)	{
 		return _service.findAllKeyDrivers(pageable);
+	}
+	
+	@GetMapping("/ResidentialKD/query")
+	@CrossOrigin(origins="*")
+	public Page<ResidentialKD> getKeyDriversBySuburdQuarterYear(
+			@RequestParam(name="suburb",required=false) String _suburb,
+			@RequestParam(name="quarter",required=false) Integer _quarter,
+			@RequestParam(name="year",required=false) Year _year,
+			Pageable pageable
+			)	{
+		return _service.findKeyDriversBySuburbQuarterYear(_suburb, _quarter, _year, pageable);
 	}
 	
 	@PostMapping("/ResidentialKD")

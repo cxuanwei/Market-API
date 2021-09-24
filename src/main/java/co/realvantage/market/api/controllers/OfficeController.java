@@ -1,5 +1,6 @@
 package co.realvantage.market.api.controllers;
 
+import java.time.Year;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.realvantage.market.api.entities.Office;
@@ -28,6 +30,25 @@ public class OfficeController {
 	@CrossOrigin(origins="*")
 	public Page<OfficeKI> getAllKeyIndicators(Pageable pageable)	{
 		return _service.findAllKeyIndicators(pageable);
+	}
+	/*
+	 * @GetMapping("/OfficeKI/query")
+	 * 
+	 * @CrossOrigin(origins="*") public Page<OfficeKI> getKeyIndicatorsBySuburb(
+	 * 
+	 * @RequestParam(name="suburb") String _suburb, Pageable pageable ) { return
+	 * _service.findAllKeyIndicators(pageable); }
+	 */
+	
+	@GetMapping("/OfficeKI/query")
+	@CrossOrigin(origins="*")
+	public Page<OfficeKI> getKeyIndicatorsBySuburdAndQuater(
+			@RequestParam(name="suburb",required=false) String _suburb,
+			@RequestParam(name="quarter",required=false) Integer _quarter,
+			@RequestParam(name="year",required=false) Year _year,
+			Pageable pageable
+			)	{
+		return _service.findKeyIndicatorsBySuburbQuarterYear(_suburb, _quarter, _year, pageable);
 	}
 	
 	@PostMapping("/OfficeKI")
@@ -56,6 +77,17 @@ public class OfficeController {
 	@CrossOrigin(origins="*")
 	public Page<OfficeKD> getAll(Pageable pageable)	{
 		return _service.findAllKeyDrivers(pageable);
+	}
+	
+	@GetMapping("/OfficeKD/query")
+	@CrossOrigin(origins="*")
+	public Page<OfficeKD> getKeyDriversBySuburdAndQuater(
+			@RequestParam(name="suburb",required=false) String _suburb,
+			@RequestParam(name="quarter",required=false) Integer _quarter,
+			@RequestParam(name="year",required=false) Year _year,
+			Pageable pageable
+			)	{
+		return _service.findKeyDriversBySuburbQuarterYear(_suburb, _quarter, _year, pageable);
 	}
 	
 	@PostMapping("/OfficeKD")

@@ -1,5 +1,6 @@
 package co.realvantage.market.api.controllers;
 
+import java.time.Year;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +13,11 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import co.realvantage.market.api.entities.IndustrialKD;
+import co.realvantage.market.api.entities.IndustrialKI;
 import co.realvantage.market.api.entities.Retail;
 import co.realvantage.market.api.entities.RetailKD;
 import co.realvantage.market.api.entities.RetailKI;
@@ -28,6 +32,17 @@ public class RetailController {
 	@CrossOrigin(origins="*")
 	public Page<RetailKI> getAllKeyIndicators(Pageable pageable)	{
 		return _service.findAllKeyIndicators(pageable);
+	}
+	
+	@GetMapping("/RetailKI/query")
+	@CrossOrigin(origins="*")
+	public Page<RetailKI> getKeyIndicatorsBySuburdQuarterYear(
+			@RequestParam(name="state",required=false) String _state,
+			@RequestParam(name="quarter",required=false) Integer _quarter,
+			@RequestParam(name="year",required=false) Year _year,
+			Pageable pageable
+			)	{
+		return _service.findKeyIndicatorsByStateQuarterYear(_state, _quarter, _year, pageable);
 	}
 	
 	@PostMapping("/RetailKI")
@@ -56,6 +71,17 @@ public class RetailController {
 	@CrossOrigin(origins="*")
 	public Page<RetailKD> getAll(Pageable pageable)	{
 		return _service.findAllKeyDrivers(pageable);
+	}
+	
+	@GetMapping("/RetailKD/query")
+	@CrossOrigin(origins="*")
+	public Page<RetailKD> getKeyDriversBySuburdQuarterYear(
+			@RequestParam(name="state",required=false) String _suburb,
+			@RequestParam(name="quarter",required=false) Integer _quarter,
+			@RequestParam(name="year",required=false) Year _year,
+			Pageable pageable
+			)	{
+		return _service.findKeyDriversByStateQuarterYear(_suburb, _quarter, _year, pageable);
 	}
 	
 	@PostMapping("/RetailKD")

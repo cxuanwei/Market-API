@@ -2,6 +2,7 @@ package co.realvantage.market.api.services;
 
 import java.time.Year;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,4 +28,8 @@ public interface IndustrialService {
 	public abstract IndustrialKD findAllKeyDriversByQuarterAndLocationAndDriver(long _quarter, Year _year, String _country, String _state, String _suburb, String _driver);
 	
 	public abstract Industrial findAllDriversAndIndicators();
+	public abstract List<IndustrialKI> findKeyIndicatorsBySuburbQuarterYear(String _suburb,Integer _quarter,Year _year);
+	public abstract Page<IndustrialKI> findKeyIndicatorsBySuburbQuarterYear(String _suburb,Integer _quarter,Year _year, Pageable pageable);
+	public abstract List<IndustrialKD> findKeyDriversByStateQuarterYear(String _state,Integer _quarter,Year _year);
+	public abstract Page<IndustrialKD> findKeyDriversByStateQuarterYear(String _state,Integer _quarter,Year _year, Pageable pageable);
 }
