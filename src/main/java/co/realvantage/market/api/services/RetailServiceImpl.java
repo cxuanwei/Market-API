@@ -165,4 +165,39 @@ public class RetailServiceImpl implements RetailService{
 		return new PageImpl<RetailKD>(Collections.emptyList());
 		
 	}
+
+	@Override
+	public List<RetailKI> findKeyIndicatorsByCountryStateQuarterYear(String _state, Integer _quarter, Year _year,
+			String _country) {
+		if(_country!=null&&_state!=null&&_quarter!=null&&_year!=null)
+			//_kiRepository.findKeyIndicatorsBySuburbQuarterYear(_quarter.longValue(), _year, _suburb, _page);
+			return _kiRepository.findKeyIndicatorsByCountryStateQuarterYear(_quarter.longValue(), _year, _state, _country);
+
+		return new ArrayList<RetailKI>();	//return any empty list
+	}
+
+	@Override
+	public Page<RetailKI> findKeyIndicatorsByCountryStateQuarterYear(String _state, Integer _quarter, Year _year,
+			String _country, Pageable pageable) {
+		if(_country!=null&&_state!=null&&_quarter!=null&&_year!=null)
+			return _kiRepository.findKeyIndicatorsByCountryStateQuarterYear(_quarter.longValue(), _year, _state, _country, pageable);
+		return new PageImpl<RetailKI>(Collections.emptyList());
+	}
+
+	@Override
+	public List<RetailKD> findKeyDriversByCountryStateQuarterYear(String _state, Integer _quarter, Year _year,
+			String _country) {
+		if(_country!=null&&_state!=null&&_quarter!=null&&_year!=null)
+			return _kdRepository.findKeyDriversByCountryStateQuarterYear(_quarter.longValue(), _year, _state, _country);
+		return new ArrayList<RetailKD>();	//return any empty list
+	}
+
+	@Override
+	public Page<RetailKD> findKeyDriversByCountryStateQuarterYear(String _state, Integer _quarter, Year _year,
+			String _country, Pageable pageable) {
+		if(_country!=null&&_state!=null&&_quarter!=null&&_year!=null)
+			return _kdRepository.findKeyDriversByCountryStateQuarterYear(_quarter.longValue(), _year, _state, _country, pageable);
+		 
+		return new PageImpl<RetailKD>(Collections.emptyList());
+	}
 }

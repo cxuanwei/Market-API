@@ -22,5 +22,11 @@ public interface OfficeKDRepository extends JpaRepository<OfficeKD, Long> {
 	
 	@Query(value="SELECT * FROM officekd WHERE quarter=?1 and year=?2 and suburb like ?3",nativeQuery=true)
 	public List<OfficeKD> findKeyDriversBySuburbQuarterYear(long _quarter, Year _year, String _suburb);
+	
+	@Query(value="SELECT * FROM officekd WHERE country like ?1 AND state like ?2 AND quarter=?3 and year=?4 and suburb like ?5",nativeQuery=true)
+	public Page<OfficeKD> findKeyDriversByCountryStateSuburbQuarterYear(String _country, String _state, long _quarter, Year _year, String _suburb, Pageable page);
+	
+	@Query(value="SELECT * FROM officekd WHERE country like ?1 AND state like ?2 AND quarter=?3 and year=?4 and suburb like ?5",nativeQuery=true)
+	public List<OfficeKD> findKeyDriversByCountryStateSuburbQuarterYear(String _country, String _state, long _quarter, Year _year, String _suburb);
 
 }

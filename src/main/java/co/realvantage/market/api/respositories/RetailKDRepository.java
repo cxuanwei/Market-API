@@ -23,4 +23,10 @@ public interface RetailKDRepository extends JpaRepository<RetailKD, Long> {
 	
 	@Query(value="SELECT * FROM retailkd WHERE quarter=?1 and year=?2 and state like ?3",nativeQuery=true)
 	public List<RetailKD> findKeyDriversByStateQuarterYear(long _quarter, Year _year, String _state);
+	
+	@Query(value="SELECT * FROM retailkd WHERE quarter=?1 AND year=?2 AND state like %?3% AND country like %?4%",nativeQuery=true)
+	public Page<RetailKD> findKeyDriversByCountryStateQuarterYear(long _quarter, Year _year, String _state, String _country, Pageable page); 
+	
+	@Query(value="SELECT * FROM retailkd WHERE quarter=?1 and year=?2 and state like %?3% AND country like %?4%",nativeQuery=true)
+	public List<RetailKD> findKeyDriversByCountryStateQuarterYear(long _quarter, Year _year, String _state, String _country);
 }

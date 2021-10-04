@@ -43,12 +43,15 @@ public class OfficeController {
 	@GetMapping("/OfficeKI/query")
 	@CrossOrigin(origins="*")
 	public Page<OfficeKI> getKeyIndicatorsBySuburdAndQuater(
+			@RequestParam(name="country",required=false) String _country,
+			@RequestParam(name="state",required=false) String _state,
 			@RequestParam(name="suburb",required=false) String _suburb,
 			@RequestParam(name="quarter",required=false) Integer _quarter,
 			@RequestParam(name="year",required=false) Year _year,
 			Pageable pageable
 			)	{
-		return _service.findKeyIndicatorsBySuburbQuarterYear(_suburb, _quarter, _year, pageable);
+		return _service.findKeyIndicatorsByCountryStateSuburbQuarterYear(_country, _state, _suburb, _quarter, _year, pageable);
+
 	}
 	
 	@PostMapping("/OfficeKI")
@@ -81,13 +84,15 @@ public class OfficeController {
 	
 	@GetMapping("/OfficeKD/query")
 	@CrossOrigin(origins="*")
-	public Page<OfficeKD> getKeyDriversBySuburdAndQuater(
+	public Page<OfficeKD> getKeyDriversByCountryStateSuburbQuarterYear(
+			@RequestParam(name="country",required=false) String _country,
+			@RequestParam(name="state",required=false) String _state,
 			@RequestParam(name="suburb",required=false) String _suburb,
 			@RequestParam(name="quarter",required=false) Integer _quarter,
 			@RequestParam(name="year",required=false) Year _year,
 			Pageable pageable
 			)	{
-		return _service.findKeyDriversBySuburbQuarterYear(_suburb, _quarter, _year, pageable);
+		return _service.findKeyDriversByCountryStateSuburbQuarterYear(_country, _state, _suburb, _quarter, _year, pageable);
 	}
 	
 	@PostMapping("/OfficeKD")

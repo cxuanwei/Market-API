@@ -9,7 +9,6 @@ import org.springframework.data.domain.Pageable;
 
 import co.realvantage.market.api.entities.Residential;
 import co.realvantage.market.api.entities.ResidentialKD;
-import co.realvantage.market.api.entities.RetailKD;
 
 public interface ResidentialService {
 	
@@ -35,5 +34,8 @@ public interface ResidentialService {
 	public abstract Residential findAllDriversAndIndicators();
 	public abstract List<ResidentialKD> findKeyDriversBySuburbQuarterYear(String _suburb,Integer _quarter,Year _year);
 	public abstract Page<ResidentialKD> findKeyDriversBySuburbQuarterYear(String _suburb,Integer _quarter,Year _year, Pageable pageable);
+	
+	public abstract List<ResidentialKD> findKeyDriversByCountrySuburbQuarterYear(String _suburb,Integer _quarter,Year _year, String _country);
+	public abstract Page<ResidentialKD> findKeyDriversByCountrySuburbQuarterYear(String _suburb,Integer _quarter,Year _year, String _country, Pageable pageable);
 	
 }

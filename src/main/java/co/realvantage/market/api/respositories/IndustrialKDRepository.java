@@ -22,4 +22,10 @@ public interface IndustrialKDRepository extends JpaRepository<IndustrialKD, Long
 	
 	@Query(value="SELECT * FROM industrialkd WHERE quarter=?1 and year=?2 and state like ?3",nativeQuery=true)
 	public List<IndustrialKD> findKeyDriversByStateQuarterYear(long _quarter, Year _year, String _state);
+	
+	@Query(value="SELECT * FROM industrialkd WHERE quarter=?1 AND year=?2 AND state like %?3% and country like %?4%",nativeQuery=true)
+	public Page<IndustrialKD> findKeyDriversByCountryStateQuarterYear(long _quarter, Year _year, String _state, String _country, Pageable page); 
+	
+	@Query(value="SELECT * FROM industrialkd WHERE quarter=?1 and year=?2 and state like %?3% and country like %?4%",nativeQuery=true)
+	public List<IndustrialKD> findKeyDriversByCountryStateQuarterYear(long _quarter, Year _year, String _state, String _country);
 }

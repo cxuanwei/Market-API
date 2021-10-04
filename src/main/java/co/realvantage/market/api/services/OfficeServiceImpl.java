@@ -133,10 +133,8 @@ public class OfficeServiceImpl implements OfficeService{
 	
 	@Override
 	public List<OfficeKI> findKeyIndicatorsBySuburbQuarterYear(String _suburb,Integer _quarter,Year _year)	{
-		if(_suburb!=null&&_quarter!=null&&_year!=null)
-			//_kiRepository.findKeyIndicatorsBySuburbQuarterYear(_quarter.longValue(), _year, _suburb, _page);
+		if(_suburb!=null&&_quarter!=null&&_year!=null)	
 			return _kiRepository.findKeyIndicatorsBySuburbQuarterYear(_quarter.longValue(), _year, _suburb);
-
 		return new ArrayList<OfficeKI>();	//return any empty list
 		
 	}
@@ -165,6 +163,42 @@ public class OfficeServiceImpl implements OfficeService{
 		 
 		return new PageImpl<OfficeKD>(Collections.emptyList());
 		
+	}
+
+	@Override
+	public List<OfficeKI> findKeyIndicatorsByCountryStateSuburbQuarterYear(String _country, String _state,
+			String _suburb, Integer _quarter, Year _year) {
+		if(_country!=null&&_state!=null&&_suburb!=null&&_quarter!=null&&_year!=null)
+			return _kiRepository.findKeyIndicatorsByCountryStateSuburbQuarterYear(_country, _state, _quarter.longValue(), _year, _suburb);
+
+		return new ArrayList<OfficeKI>();	//return any empty list
+	}
+
+	@Override
+	public Page<OfficeKI> findKeyIndicatorsByCountryStateSuburbQuarterYear(String _country, String _state,
+			String _suburb, Integer _quarter, Year _year, Pageable pageable) {
+		if(_country!=null&&_state!=null&&_suburb!=null&&_quarter!=null&&_year!=null)
+			return _kiRepository.findKeyIndicatorsByCountryStateSuburbQuarterYear(_country, _state, _quarter.longValue(), _year, _suburb, pageable);
+		
+		return new PageImpl<OfficeKI>(Collections.emptyList());
+	}
+
+	@Override
+	public List<OfficeKD> findKeyDriversByCountryStateSuburbQuarterYear(String _country, String _state, String _suburb,
+			Integer _quarter, Year _year) {
+		if(_country!=null&&_state!=null&&_suburb!=null&&_quarter!=null&&_year!=null)
+			return _kdRepository.findKeyDriversByCountryStateSuburbQuarterYear(_country,_state,_quarter.longValue(), _year, _suburb);
+
+		return new ArrayList<OfficeKD>();	//return any empty list
+	}
+
+	@Override
+	public Page<OfficeKD> findKeyDriversByCountryStateSuburbQuarterYear(String _country, String _state, String _suburb,
+			Integer _quarter, Year _year, Pageable pageable) {
+		if(_country!=null&&_state!=null&&_suburb!=null&&_quarter!=null&&_year!=null)
+			return _kdRepository.findKeyDriversByCountryStateSuburbQuarterYear(_country, _state, _quarter.longValue(), _year, _suburb, pageable);
+		
+		return new PageImpl<OfficeKD>(Collections.emptyList());
 	}
 
 }

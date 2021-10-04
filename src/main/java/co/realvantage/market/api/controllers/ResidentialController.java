@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import co.realvantage.market.api.entities.Residential;
 import co.realvantage.market.api.entities.ResidentialKD;
-import co.realvantage.market.api.entities.RetailKI;
 import co.realvantage.market.api.services.ResidentialService;
 
 @RestController
@@ -65,12 +64,13 @@ public class ResidentialController {
 	@GetMapping("/ResidentialKD/query")
 	@CrossOrigin(origins="*")
 	public Page<ResidentialKD> getKeyDriversBySuburdQuarterYear(
+			@RequestParam(name="country",required=false) String _country,
 			@RequestParam(name="suburb",required=false) String _suburb,
 			@RequestParam(name="quarter",required=false) Integer _quarter,
 			@RequestParam(name="year",required=false) Year _year,
 			Pageable pageable
 			)	{
-		return _service.findKeyDriversBySuburbQuarterYear(_suburb, _quarter, _year, pageable);
+		return _service.findKeyDriversByCountrySuburbQuarterYear(_suburb, _quarter, _year, _country, pageable);
 	}
 	
 	@PostMapping("/ResidentialKD")

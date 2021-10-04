@@ -22,4 +22,10 @@ public interface ResidentialKDRepository extends JpaRepository<ResidentialKD, Lo
 	
 	@Query(value="SELECT * FROM residentialkd WHERE quarter=?1 and year=?2 and suburb like ?3",nativeQuery=true)
 	public List<ResidentialKD> findKeyDriversBySuburbQuarterYear(long _quarter, Year _year, String _suburb);
+	
+	@Query(value="SELECT * FROM residentialkd WHERE quarter=?1 AND year=?2 AND suburb like %?3% AND country like %?4%",nativeQuery=true)
+	public Page<ResidentialKD> findKeyDriversByCountrySuburbQuarterYear(long _quarter, Year _year, String _suburb, String _country, Pageable page); 
+	
+	@Query(value="SELECT * FROM residentialkd WHERE quarter=?1 and year=?2 and suburb like %?3% AND country like %?4%",nativeQuery=true)
+	public List<ResidentialKD> findKeyDriversByCountrySuburbQuarterYear(long _quarter, Year _year, String _suburb, String _country);
 }

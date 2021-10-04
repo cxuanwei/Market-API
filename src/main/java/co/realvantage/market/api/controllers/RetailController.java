@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import co.realvantage.market.api.entities.IndustrialKD;
-import co.realvantage.market.api.entities.IndustrialKI;
 import co.realvantage.market.api.entities.Retail;
 import co.realvantage.market.api.entities.RetailKD;
 import co.realvantage.market.api.entities.RetailKI;

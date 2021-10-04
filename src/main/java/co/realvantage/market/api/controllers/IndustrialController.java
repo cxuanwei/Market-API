@@ -18,8 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import co.realvantage.market.api.entities.IndustrialKD;
 import co.realvantage.market.api.entities.IndustrialKI;
-import co.realvantage.market.api.entities.OfficeKD;
-import co.realvantage.market.api.entities.OfficeKI;
 import co.realvantage.market.api.entities.Industrial;
 import co.realvantage.market.api.services.IndustrialService;
 
@@ -37,12 +35,14 @@ public class IndustrialController {
 	@GetMapping("/IndustrialKI/query")
 	@CrossOrigin(origins="*")
 	public Page<IndustrialKI> getKeyIndicatorsBySuburdAndQuater(
+			@RequestParam(name="country",required=false) String _country,
+			@RequestParam(name="state",required=false) String _state,
 			@RequestParam(name="suburb",required=false) String _suburb,
 			@RequestParam(name="quarter",required=false) Integer _quarter,
 			@RequestParam(name="year",required=false) Year _year,
 			Pageable pageable
 			)	{
-		return _service.findKeyIndicatorsBySuburbQuarterYear(_suburb, _quarter, _year, pageable);
+		return _service.findKeyIndicatorsByCountryStateSuburbQuarterYear(_country, _state, _suburb, _quarter, _year, pageable);
 	}
 	
 	@PostMapping("/IndustrialKI")
@@ -76,12 +76,13 @@ public class IndustrialController {
 	@GetMapping("/IndustrialKD/query")
 	@CrossOrigin(origins="*")
 	public Page<IndustrialKD> getKeyDriversBySuburdAndQuater(
-			@RequestParam(name="state",required=false) String _suburb,
+			@RequestParam(name="country",required=false) String _country,
+			@RequestParam(name="state",required=false) String _state,
 			@RequestParam(name="quarter",required=false) Integer _quarter,
 			@RequestParam(name="year",required=false) Year _year,
 			Pageable pageable
 			)	{
-		return _service.findKeyDriversByStateQuarterYear(_suburb, _quarter, _year, pageable);
+		return _service.findKeyDriversByCountryStateQuarterYear(_country, _state, _quarter, _year, pageable);
 	}
 	
 	@PostMapping("/IndustrialKD")

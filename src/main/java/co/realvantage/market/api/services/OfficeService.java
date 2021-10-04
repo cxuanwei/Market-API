@@ -32,5 +32,9 @@ public interface OfficeService {
 	public abstract Page<OfficeKI> findKeyIndicatorsBySuburbQuarterYear(String _suburb,Integer _quarter,Year _year, Pageable pageable);
 	public abstract List<OfficeKD> findKeyDriversBySuburbQuarterYear(String _suburb,Integer _quarter,Year _year);
 	public abstract Page<OfficeKD> findKeyDriversBySuburbQuarterYear(String _suburb,Integer _quarter,Year _year, Pageable pageable);
+	public abstract List<OfficeKI> findKeyIndicatorsByCountryStateSuburbQuarterYear(String _country, String _state, String _suburb,Integer _quarter,Year _year);
+	public abstract Page<OfficeKI> findKeyIndicatorsByCountryStateSuburbQuarterYear(String _country, String _state, String _suburb,Integer _quarter,Year _year, Pageable pageable);
+	public abstract List<OfficeKD> findKeyDriversByCountryStateSuburbQuarterYear(String _country, String _state, String _suburb,Integer _quarter,Year _year);
+	public abstract Page<OfficeKD> findKeyDriversByCountryStateSuburbQuarterYear(String _country, String _state, String _suburb,Integer _quarter,Year _year, Pageable pageable);
 	
 }
