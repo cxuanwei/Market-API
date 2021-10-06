@@ -42,7 +42,7 @@ public class OfficeController {
 	
 	@GetMapping("/OfficeKI/query")
 	@CrossOrigin(origins="*")
-	public Page<OfficeKI> getKeyIndicatorsBySuburdAndQuater(
+	public Page<OfficeKI> getKeyIndicatorsByCountryStateSuburbQuarterYear(
 			@RequestParam(name="country",required=false) String _country,
 			@RequestParam(name="state",required=false) String _state,
 			@RequestParam(name="suburb",required=false) String _suburb,

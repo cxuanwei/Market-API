@@ -14,19 +14,19 @@ import co.realvantage.market.api.entities.OfficeKI;
 @Repository
 public interface OfficeKIRepository extends JpaRepository<OfficeKI, Long> {
 	
-	@Query(value="SELECT * FROM officeki WHERE quarter=?1 AND year=?2 AND country like ?3 AND state like ?4 and suburb like ?5 and indicator like ?6 and grade like ?7",nativeQuery=true)
+	@Query(value="SELECT * FROM officeki WHERE quarter=?1 AND year=?2 AND country ILIKE ?3 AND state ILIKE ?4 and suburb ILIKE ?5 and indicator ILIKE ?6 and grade ILIKE ?7",nativeQuery=true)
 	public OfficeKI findByTimePeriodAndLocationAndIndicatorAndGrade(long _quarter, Year _year, String _country, String _state, String _suburb, String _indicator, String _grade);
 	
-	@Query(value="SELECT * FROM officeki WHERE quarter=?1 AND year=?2 AND suburb like ?3",nativeQuery=true)
+	@Query(value="SELECT * FROM officeki WHERE quarter=?1 AND year=?2 AND suburb ILIKE ?3",nativeQuery=true)
 	public Page<OfficeKI> findKeyIndicatorsBySuburbQuarterYear(long _quarter, Year _year, String _suburb, Pageable page); 
 	
 	@Query(value="SELECT * FROM officeki WHERE quarter=?1 AND year=?2 AND suburb %?1%",nativeQuery=true)
 	public List<OfficeKI> findKeyIndicatorsBySuburbQuarterYear(long _quarter, Year _year, String _suburb);
 	
-	@Query(value="SELECT * FROM officeki WHERE country like ?1 AND state like ?2 AND quarter=?3 AND year=?4 AND suburb like ?5",nativeQuery=true)
+	@Query(value="SELECT * FROM officeki WHERE country ILIKE %?1% AND state ILIKE %?2% AND quarter=?3 AND year=?4 AND suburb ILIKE %?5%",nativeQuery=true)
 	public Page<OfficeKI> findKeyIndicatorsByCountryStateSuburbQuarterYear(String _country, String _state, long _quarter, Year _year, String _suburb, Pageable page); 
 	
-	@Query(value="SELECT * FROM officeki WHERE country like ?1 AND state like ?2 AND quarter=?3 and year=?4 and suburb like ?5",nativeQuery=true)
+	@Query(value="SELECT * FROM officeki WHERE country ILIKE %?1% AND state ILIKE %?2% AND quarter=?3 and year=?4 and suburb ILIKE %?5%",nativeQuery=true)
 	public List<OfficeKI> findKeyIndicatorsByCountryStateSuburbQuarterYear(String _country, String _state, long _quarter, Year _year, String _suburb);
 	
 }
