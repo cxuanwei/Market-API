@@ -75,7 +75,7 @@ public class IndustrialController {
 	
 	@GetMapping("/IndustrialKD/query")
 	@CrossOrigin(origins="*")
-	public Page<IndustrialKD> getKeyDriversBySuburdAndQuater(
+	public Page<IndustrialKD> getKeyDriversBySuburdQuarterYear(
 			@RequestParam(name="country",required=false) String _country,
 			@RequestParam(name="state",required=false) String _state,
 			@RequestParam(name="quarter",required=false) Integer _quarter,
@@ -130,5 +130,41 @@ public class IndustrialController {
 	public ResponseEntity<Industrial> getIndustrials()	{
 		//return new ResponseEntity<Industrial>(new Industrial(),HttpStatus.ACCEPTED);
 		return new ResponseEntity<Industrial>(_service.findAllDriversAndIndicators(),HttpStatus.ACCEPTED);
+	}
+	
+	@GetMapping("/IndustrialKI/singlequery")
+	@CrossOrigin(origins="*")
+	public ResponseEntity<IndustrialKI> getKeyIndicatorByKICountryStateQuarterYear(
+			@RequestParam(name="ki",required=false) String _ki,
+			@RequestParam(name="grade",required=false) String _grade,
+			@RequestParam(name="country",required=false) String _country,
+			@RequestParam(name="state",required=false) String _state,
+			@RequestParam(name="suburb",required=false) String _suburb,
+			@RequestParam(name="quarter",required=false) Integer _quarter,
+			@RequestParam(name="year",required=false) Year _year
+			)	{
+		IndustrialKI industrialKI =  _service.findKeyIndicatorByKICountryStateQuarterYear(_ki, _grade, _country, _state, _suburb, _quarter, _year);
+		if(industrialKI!=null)
+			return new ResponseEntity<>(industrialKI, HttpStatus.OK);
+		else
+			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+	}
+	
+	@GetMapping("/IndustrialKD/singlequery")
+	@CrossOrigin(origins="*")
+	public ResponseEntity<IndustrialKD> getKeyDriverByKDQuarterYear(
+			@RequestParam(name="kd",required=false) String _kd,
+			@RequestParam(name="country",required=false) String _country,
+			@RequestParam(name="state",required=false) String _state,
+			@RequestParam(name="quarter",required=false) Integer _quarter,
+			@RequestParam(name="year",required=false) Year _year
+			)	{
+		
+		IndustrialKD industrialKD =  _service.findKeyDriverByKDCountryStateQuarterYear(_country, _state, _quarter, _year, _kd);
+		if(industrialKD!=null)
+			return new ResponseEntity<>(industrialKD, HttpStatus.OK);
+		else
+			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+		
 	}
 }

@@ -28,4 +28,7 @@ public interface RetailKIRepository extends JpaRepository<RetailKI, Long> {
 	
 	@Query(value="SELECT * FROM retailki WHERE quarter=?1 and year=?2 and state ILIKE %?3% AND country ILIKE %?4%",nativeQuery=true)
 	public List<RetailKI> findKeyIndicatorsByCountryStateQuarterYear(long _quarter, Year _year, String _state, String _country);
+	
+	@Query(value="SELECT * FROM retailki WHERE quarter=?1 AND year=?2 AND country = ?3 AND state = ?4 and indicator = ?5 and grade = ?6",nativeQuery=true)
+	public RetailKI findKeyIndicatorByKIGradeCountryStateQuarterYear(long _quarter, Year _year, String _country, String _state,String _indicator, String _grade);
 }

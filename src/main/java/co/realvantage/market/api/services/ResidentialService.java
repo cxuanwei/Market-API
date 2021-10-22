@@ -38,4 +38,6 @@ public interface ResidentialService {
 	public abstract List<ResidentialKD> findKeyDriversByCountrySuburbQuarterYear(String _suburb,Integer _quarter,Year _year, String _country);
 	public abstract Page<ResidentialKD> findKeyDriversByCountrySuburbQuarterYear(String _suburb,Integer _quarter,Year _year, String _country, Pageable pageable);
 	
+	public abstract ResidentialKD findKeyDriverByKDSuburbCountryQuarterYear(String _kd, String _suburb, String _country, Integer _quarter,Year _year);
+	
 }

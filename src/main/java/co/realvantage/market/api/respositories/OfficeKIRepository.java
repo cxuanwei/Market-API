@@ -29,4 +29,7 @@ public interface OfficeKIRepository extends JpaRepository<OfficeKI, Long> {
 	@Query(value="SELECT * FROM officeki WHERE country ILIKE %?1% AND state ILIKE %?2% AND quarter=?3 and year=?4 and suburb ILIKE %?5%",nativeQuery=true)
 	public List<OfficeKI> findKeyIndicatorsByCountryStateSuburbQuarterYear(String _country, String _state, long _quarter, Year _year, String _suburb);
 	
+	@Query(value="SELECT * FROM officeki WHERE indicator = ?1 AND grade = ?2 AND country = ?3 AND state = ?4 AND quarter=?5 and year=?6 and suburb = ?7",nativeQuery=true)
+	public OfficeKI findKeyIndicatorByKIGradeCountryStateSuburbQuarterYear(String _ki, String _grade, String _country, String _state, long _quarter, Year _year, String _suburb);
+	
 }

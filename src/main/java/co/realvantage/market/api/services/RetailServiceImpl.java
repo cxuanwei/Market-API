@@ -200,4 +200,18 @@ public class RetailServiceImpl implements RetailService{
 		 
 		return new PageImpl<RetailKD>(Collections.emptyList());
 	}
+
+	@Override
+	public RetailKD findKeyDriverByKDStateCountryQuarterYear(String _kd, String _state, String _country, Integer _quarter, Year _year) {
+		if(_kd!=null&&_state!=null&&_country!=null&&_quarter!=null&&_year!=null)
+			return _kdRepository.findKeyDriverByKDStateCountryQuarterYear(_quarter.longValue(), _year, _state, _country, _kd);
+		return null;
+	}
+
+	@Override
+	public RetailKI findKeyIndicatorByKIGradeStateQuarterYear(String _ki, String _grade, String _state, String _country, Integer _quarter, Year _year) {
+		if(_ki!=null&&_grade!=null&&_state!=null&&_country!=null&&_quarter!=null&&_year!=null)
+			return _kiRepository.findKeyIndicatorByKIGradeCountryStateQuarterYear(_quarter.longValue(), _year, _country, _state, _ki, _grade);
+		return null;
+	}
 }

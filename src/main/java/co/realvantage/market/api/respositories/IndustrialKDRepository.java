@@ -28,4 +28,7 @@ public interface IndustrialKDRepository extends JpaRepository<IndustrialKD, Long
 	
 	@Query(value="SELECT * FROM industrialkd WHERE quarter=?1 and year=?2 and state ILIKE %?3% and country ILIKE %?4%",nativeQuery=true)
 	public List<IndustrialKD> findKeyDriversByCountryStateQuarterYear(long _quarter, Year _year, String _state, String _country);
+	
+	@Query(value="SELECT * FROM industrialkd WHERE quarter=?1 and year=?2 and state = ?3 and country = ?4 and driver = ?5",nativeQuery=true)
+	public IndustrialKD findKeyDriverByKDCountryStateQuarterYear(long _quarter, Year _year, String _state, String _country, String _kd);
 }

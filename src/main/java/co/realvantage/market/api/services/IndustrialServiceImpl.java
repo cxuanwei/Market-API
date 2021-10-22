@@ -202,4 +202,22 @@ public class IndustrialServiceImpl implements IndustrialService{
 		 
 		return new PageImpl<IndustrialKD>(Collections.emptyList());
 	}
+
+	@Override
+	public IndustrialKI findKeyIndicatorByKICountryStateQuarterYear(String _ki, String _grade, String _country, String _state,
+			String _suburb, Integer _quarter, Year _year) {
+		if(_ki!=null&&_grade!=null&&_country!=null&&_state!=null&&_suburb!=null&&_quarter!=null&&_year!=null)
+			return _kiRepository.findKeyIndicatorByKICountryStateQuarterYear(_quarter.longValue(), _year, _suburb, _state, _country, _ki, _grade);
+		else
+			return null;
+	}
+
+	@Override
+	public IndustrialKD findKeyDriverByKDCountryStateQuarterYear(String _country, String _state, Integer _quarter,
+			Year _year, String _kd) {
+		if(_kd!=null&&_country!=null&&_state!=null&&_quarter!=null&&_year!=null)
+			return _kdRepository.findKeyDriverByKDCountryStateQuarterYear(_quarter.longValue(), _year, _state, _country, _kd);
+		else
+			return null;
+	}
 }

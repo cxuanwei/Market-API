@@ -28,5 +28,8 @@ public interface IndustrialKIRepository extends JpaRepository<IndustrialKI, Long
 	
 	@Query(value="SELECT * FROM industrialki WHERE quarter=?1 and year=?2 and suburb ILIKE %?3% and state ILIKE %?4% and country ILIKE %?5%",nativeQuery=true)
 	public List<IndustrialKI> findKeyIndicatorsByCountryStateSuburbQuarterYear(long _quarter, Year _year, String _suburb, String _state, String _country);
+	
+	@Query(value="SELECT * FROM industrialki WHERE quarter=?1 and year=?2 and suburb = ?3 and state = ?4 and country = ?5 and indicator=?6 and grade=?7",nativeQuery=true)
+	public IndustrialKI findKeyIndicatorByKICountryStateQuarterYear(long _quarter, Year _year, String _suburb, String _state, String _country, String _ki, String _grade);
 }
  

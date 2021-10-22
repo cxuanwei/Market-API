@@ -74,12 +74,12 @@ public class RetailController {
 	@GetMapping("/RetailKD/query")
 	@CrossOrigin(origins="*")
 	public Page<RetailKD> getKeyDriversBySuburdQuarterYear(
-			@RequestParam(name="state",required=false) String _suburb,
+			@RequestParam(name="state",required=false) String _state,
 			@RequestParam(name="quarter",required=false) Integer _quarter,
 			@RequestParam(name="year",required=false) Year _year,
 			Pageable pageable
 			)	{
-		return _service.findKeyDriversByStateQuarterYear(_suburb, _quarter, _year, pageable);
+		return _service.findKeyDriversByStateQuarterYear(_state, _quarter, _year, pageable);
 	}
 	
 	@PostMapping("/RetailKD")
@@ -127,5 +127,38 @@ public class RetailController {
 	public ResponseEntity<Retail> getIndustrials()	{
 		//return new ResponseEntity<Industrial>(new Industrial(),HttpStatus.ACCEPTED);
 		return new ResponseEntity<Retail>(_service.findAllDriversAndIndicators(),HttpStatus.ACCEPTED);
+	}
+	
+	@GetMapping("/RetailKD/singlequery")
+	@CrossOrigin(origins="*")
+	public ResponseEntity<RetailKD> getKeyDriverByKDStateQuarterYear(
+			@RequestParam(name="kd",required=false) String _kd,
+			@RequestParam(name="state",required=false) String _state,
+			@RequestParam(name="country",required=false) String _country,
+			@RequestParam(name="quarter",required=false) Integer _quarter,
+			@RequestParam(name="year",required=false) Year _year
+			)	{
+		RetailKD retailKD = _service.findKeyDriverByKDStateCountryQuarterYear(_kd, _state, _country, _quarter, _year);
+		if (retailKD!=null)
+			return new ResponseEntity<>(retailKD, HttpStatus.OK);
+		return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+		
+	}
+	
+	@GetMapping("/RetailKI/singlequery")
+	@CrossOrigin(origins="*")
+	public ResponseEntity<RetailKI> getKeyIndicatorByKIGradeStateCountryQuarterYear(
+			@RequestParam(name="ki",required=false) String _ki,
+			@RequestParam(name="grade",required=false) String _grade,
+			@RequestParam(name="state",required=false) String _state,
+			@RequestParam(name="country",required=false) String _country,
+			@RequestParam(name="quarter",required=false) Integer _quarter,
+			@RequestParam(name="year",required=false) Year _year,
+			Pageable pageable
+			)	{
+		RetailKI retailKI =  _service.findKeyIndicatorByKIGradeStateQuarterYear(_ki, _grade, _state, _country, _quarter, _year);
+		if(retailKI!=null)
+				return new ResponseEntity<>(retailKI, HttpStatus.OK);
+		return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
 	}
 }

@@ -168,4 +168,12 @@ public class ResidentialServiceImpl implements ResidentialService{
 		return new PageImpl<ResidentialKD>(Collections.emptyList());
 	}
 
+	@Override
+	public ResidentialKD findKeyDriverByKDSuburbCountryQuarterYear(String _kd, String _suburb, String _country,
+			Integer _quarter, Year _year) {
+		if(_kd!=null&&_country!=null&&_suburb!=null&&_quarter!=null&&_year!=null)
+			return _kdRepository.findKeyDriverBySuburbCountryQuarterYear(_quarter.longValue(), _year, _suburb, _country, _kd);
+		return null;
+	}
+
 }

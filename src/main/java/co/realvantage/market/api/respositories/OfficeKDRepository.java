@@ -29,4 +29,6 @@ public interface OfficeKDRepository extends JpaRepository<OfficeKD, Long> {
 	@Query(value="SELECT * FROM officekd WHERE country  ILIKE  %?1% AND state  ILIKE %?2% AND quarter=?3 and year=?4 and suburb  ILIKE %?5%",nativeQuery=true)
 	public List<OfficeKD> findKeyDriversByCountryStateSuburbQuarterYear(String _country, String _state, long _quarter, Year _year, String _suburb);
 
+	@Query(value="SELECT * FROM officekd WHERE driver = ?1 AND country = ?2 AND state = ?3 AND quarter=?4 and year=?5 and suburb = ?6",nativeQuery=true)
+	public OfficeKD findKeyDriverByKDCountryStateSuburbQuarterYear(String _kd, String _country, String _state, long _quarter, Year _year, String _suburb);
 }

@@ -201,4 +201,23 @@ public class OfficeServiceImpl implements OfficeService{
 		return new PageImpl<OfficeKD>(Collections.emptyList());
 	}
 
+	@Override
+	public OfficeKI findKeyIndicatorByKIGradeCountryStateSuburbQuarterYear(String _ki, String _grade, String _country, String _state,
+			String _suburb, Integer _quarter, Year _year) {
+		if(_ki!=null&& _grade!=null&&_country!=null&&_state!=null&&_suburb!=null&&_quarter!=null&&_year!=null)
+			return _kiRepository.findKeyIndicatorByKIGradeCountryStateSuburbQuarterYear(_ki, _grade, _country, _state, _quarter.longValue(), _year, _suburb);
+		
+		return null;
+	}
+	
+	@Override
+	public OfficeKD findKeyDriverByKDCountryStateSuburbQuarterYear(String _kd, String _country, String _state,
+			String _suburb, Integer _quarter, Year _year) {
+		if(_kd!=null&&_country!=null&&_state!=null&&_suburb!=null&&_quarter!=null&&_year!=null)
+			return _kdRepository.findKeyDriverByKDCountryStateSuburbQuarterYear(_kd, _country, _state, _quarter.longValue(), _year, _suburb);
+		
+		return null;
+	}
+
+
 }

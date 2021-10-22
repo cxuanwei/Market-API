@@ -54,6 +54,24 @@ public class OfficeController {
 
 	}
 	
+	@GetMapping("/OfficeKI/singlequery")
+	@CrossOrigin(origins="*")
+	public ResponseEntity<OfficeKI> getKeyIndicatorByKIGradeCountryStateSuburbQuarterYear(
+			@RequestParam(name="ki",required=false) String _ki,
+			@RequestParam(name="grade",required=false) String _grade,
+			@RequestParam(name="country",required=false) String _country,
+			@RequestParam(name="state",required=false) String _state,
+			@RequestParam(name="suburb",required=false) String _suburb,
+			@RequestParam(name="quarter",required=false) Integer _quarter,
+			@RequestParam(name="year",required=false) Year _year
+			)	{
+		OfficeKI officeKi=_service.findKeyIndicatorByKIGradeCountryStateSuburbQuarterYear(_ki, _grade, _country, _state, _suburb, _quarter, _year);
+		if(officeKi!=null)	
+			return new ResponseEntity<>(officeKi, HttpStatus.OK);
+		else
+			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+	}
+	
 	@PostMapping("/OfficeKI")
 	@CrossOrigin(origins="*")
 	public ResponseEntity<OfficeKI> create(@Validated @RequestBody OfficeKI ki)	{
@@ -142,4 +160,21 @@ public class OfficeController {
 		return new ResponseEntity<Office>(_service.findAllDriversAndIndicators(), HttpStatus.CREATED);
 	}
 	
+	
+	@GetMapping("/OfficeKD/singlequery")
+	@CrossOrigin(origins="*")
+	public ResponseEntity<OfficeKD> getKeyDriverByKDGradeCountryStateSuburbQuarterYear(
+			@RequestParam(name="kd",required=false) String _kd,
+			@RequestParam(name="country",required=false) String _country,
+			@RequestParam(name="state",required=false) String _state,
+			@RequestParam(name="suburb",required=false) String _suburb,
+			@RequestParam(name="quarter",required=false) Integer _quarter,
+			@RequestParam(name="year",required=false) Year _year
+			)	{
+		OfficeKD officeKd=_service.findKeyDriverByKDCountryStateSuburbQuarterYear(_kd, _country, _state, _suburb, _quarter, _year);
+		if(officeKd!=null)	
+			return new ResponseEntity<>(officeKd, HttpStatus.OK);
+		else
+			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+	}
 }

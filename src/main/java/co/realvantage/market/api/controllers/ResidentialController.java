@@ -115,4 +115,20 @@ public class ResidentialController {
 		//return new ResponseEntity<Industrial>(new Industrial(),HttpStatus.ACCEPTED);
 		return new ResponseEntity<Residential>(_service.findAllDriversAndIndicators(),HttpStatus.ACCEPTED);
 	}
+	
+	@GetMapping("/ResidentialKD/singlequery")
+	@CrossOrigin(origins="*")
+	public ResponseEntity<ResidentialKD> getKeyDriverByKDSuburdCountryQuarterYear(
+			@RequestParam(name="kd",required=false) String _kd,
+			@RequestParam(name="country",required=false) String _country,
+			@RequestParam(name="suburb",required=false) String _suburb,
+			@RequestParam(name="quarter",required=false) Integer _quarter,
+			@RequestParam(name="year",required=false) Year _year,
+			Pageable pageable
+			)	{
+		ResidentialKD residentialKD = _service.findKeyDriverByKDSuburbCountryQuarterYear(_kd, _suburb, _country, _quarter, _year);
+		if(residentialKD!=null)
+			return new ResponseEntity<>(residentialKD, HttpStatus.OK);
+		return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+	}
 }

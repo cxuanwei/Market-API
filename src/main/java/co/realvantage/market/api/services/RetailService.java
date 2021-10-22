@@ -38,4 +38,7 @@ public interface RetailService {
 	public abstract List<RetailKD> findKeyDriversByCountryStateQuarterYear(String _state,Integer _quarter,Year _year, String _country);
 	public abstract Page<RetailKD> findKeyDriversByCountryStateQuarterYear(String _state,Integer _quarter,Year _year, String _country,Pageable pageable);
 	
+	public abstract RetailKD findKeyDriverByKDStateCountryQuarterYear(String _kd, String _state, String _country, Integer _quarter,Year _year);
+	public abstract RetailKI findKeyIndicatorByKIGradeStateQuarterYear(String _ki, String _grade, String _state,String _country, Integer _quarter,Year _year);
+	
 }

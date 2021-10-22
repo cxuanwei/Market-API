@@ -37,4 +37,7 @@ public interface IndustrialService {
 	public abstract Page<IndustrialKI> findKeyIndicatorsByCountryStateSuburbQuarterYear(String _country, String _state, String _suburb,Integer _quarter,Year _year, Pageable pageable);
 	public abstract List<IndustrialKD> findKeyDriversByCountryStateQuarterYear(String _country, String _state,Integer _quarter,Year _year);
 	public abstract Page<IndustrialKD> findKeyDriversByCountryStateQuarterYear(String _country, String _state,Integer _quarter,Year _year, Pageable pageable);
+	
+	public abstract IndustrialKI findKeyIndicatorByKICountryStateQuarterYear(String _ki, String _grade, String _country, String _state, String _suburb, Integer _quarter,Year _year);
+	public abstract IndustrialKD findKeyDriverByKDCountryStateQuarterYear(String _country, String _state,Integer _quarter,Year _year, String _kd);
 }
