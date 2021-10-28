@@ -172,7 +172,8 @@ public class RetailServiceImpl implements RetailService{
 		if(_country!=null&&_state!=null&&_quarter!=null&&_year!=null)
 			//_kiRepository.findKeyIndicatorsBySuburbQuarterYear(_quarter.longValue(), _year, _suburb, _page);
 			return _kiRepository.findKeyIndicatorsByCountryStateQuarterYear(_quarter.longValue(), _year, _state, _country);
-
+		else if(_state!=null&&_quarter!=null&&_year!=null)
+			return _kiRepository.findKeyIndicatorsByStateQuarterYear(_quarter.longValue(), _year, _state);
 		return new ArrayList<RetailKI>();	//return any empty list
 	}
 
@@ -181,24 +182,30 @@ public class RetailServiceImpl implements RetailService{
 			String _country, Pageable pageable) {
 		if(_country!=null&&_state!=null&&_quarter!=null&&_year!=null)
 			return _kiRepository.findKeyIndicatorsByCountryStateQuarterYear(_quarter.longValue(), _year, _state, _country, pageable);
+		else if(_state!=null&&_quarter!=null&&_year!=null)
+			return _kiRepository.findKeyIndicatorsByStateQuarterYear(_quarter.longValue(), _year, _state, pageable);
 		return new PageImpl<RetailKI>(Collections.emptyList());
 	}
 
 	@Override
-	public List<RetailKD> findKeyDriversByCountryStateQuarterYear(String _state, Integer _quarter, Year _year,
-			String _country) {
+	public List<RetailKD> findKeyDriversByCountryStateQuarterYear(String _country, String _state, Integer _quarter, Year _year) {
 		if(_country!=null&&_state!=null&&_quarter!=null&&_year!=null)
 			return _kdRepository.findKeyDriversByCountryStateQuarterYear(_quarter.longValue(), _year, _state, _country);
-		return new ArrayList<RetailKD>();	//return any empty list
+		else if(_state!=null&&_quarter!=null&&_year!=null)
+			return _kdRepository.findKeyDriversByStateQuarterYear(_quarter.longValue(), _year, _state);
+		else
+			return new ArrayList<RetailKD>();	//return any empty list
 	}
 
 	@Override
-	public Page<RetailKD> findKeyDriversByCountryStateQuarterYear(String _state, Integer _quarter, Year _year,
-			String _country, Pageable pageable) {
+	public Page<RetailKD> findKeyDriversByCountryStateQuarterYear(String _country, String _state, Integer _quarter, Year _year,
+		 Pageable pageable) {
 		if(_country!=null&&_state!=null&&_quarter!=null&&_year!=null)
 			return _kdRepository.findKeyDriversByCountryStateQuarterYear(_quarter.longValue(), _year, _state, _country, pageable);
-		 
-		return new PageImpl<RetailKD>(Collections.emptyList());
+		else if(_state!=null&&_quarter!=null&&_year!=null)
+			return _kdRepository.findKeyDriversByStateQuarterYear(_quarter.longValue(), _year, _state, pageable);
+		else 
+			return new PageImpl<RetailKD>(Collections.emptyList());
 	}
 
 	@Override

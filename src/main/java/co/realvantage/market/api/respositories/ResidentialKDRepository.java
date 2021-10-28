@@ -17,10 +17,10 @@ public interface ResidentialKDRepository extends JpaRepository<ResidentialKD, Lo
 	@Query(value="SELECT * FROM residentialkd WHERE quarter=?1 AND year=?2 AND country ILIKE ?3 AND state ILIKE ?4 AND suburb ILIKE ?5 AND driver ILIKE ?6",nativeQuery=true)
 	public ResidentialKD findByTimePeriodAndLocationAndDriver(long _quarter, Year _year, String _country, String _state, String _suburb, String _driver);
 	
-	@Query(value="SELECT * FROM residentialkd WHERE quarter=?1 AND year=?2 AND suburb ILIKE ?3",nativeQuery=true)
+	@Query(value="SELECT * FROM residentialkd WHERE quarter=?1 AND year=?2 AND suburb ILIKE %?3%",nativeQuery=true)
 	public Page<ResidentialKD> findKeyDriversBySuburbQuarterYear(long _quarter, Year _year, String _suburb, Pageable page); 
 	
-	@Query(value="SELECT * FROM residentialkd WHERE quarter=?1 and year=?2 and suburb ILIKE ?3",nativeQuery=true)
+	@Query(value="SELECT * FROM residentialkd WHERE quarter=?1 and year=?2 and suburb ILIKE %?3%",nativeQuery=true)
 	public List<ResidentialKD> findKeyDriversBySuburbQuarterYear(long _quarter, Year _year, String _suburb);
 	
 	@Query(value="SELECT * FROM residentialkd WHERE quarter=?1 AND year=?2 AND suburb ILIKE %?3% AND country ILIKE %?4%",nativeQuery=true)

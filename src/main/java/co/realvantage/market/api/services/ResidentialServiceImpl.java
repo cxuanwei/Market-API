@@ -156,8 +156,10 @@ public class ResidentialServiceImpl implements ResidentialService{
 		if(_country!=null&&_suburb!=null&&_quarter!=null&&_year!=null)
 			//_kiRepository.findKeyIndicatorsBySuburbQuarterYear(_quarter.longValue(), _year, _suburb, _page);
 			return _kdRepository.findKeyDriversByCountrySuburbQuarterYear(_quarter.longValue(), _year, _suburb, _country);
-
-		return new ArrayList<ResidentialKD>();	//return any empty list
+		else if(_suburb!=null&&_quarter!=null&&_year!=null)
+			return _kdRepository.findKeyDriversBySuburbQuarterYear(_quarter.longValue(), _year, _suburb);
+		else
+			return new ArrayList<ResidentialKD>();	//return any empty list
 	}
 
 	@Override
@@ -165,7 +167,10 @@ public class ResidentialServiceImpl implements ResidentialService{
 			String _country, Pageable pageable) {
 		if(_country!=null&&_suburb!=null&&_quarter!=null&&_year!=null)
 			return _kdRepository.findKeyDriversByCountrySuburbQuarterYear(_quarter.longValue(), _year, _suburb, _country, pageable);
-		return new PageImpl<ResidentialKD>(Collections.emptyList());
+		else if(_suburb!=null&&_quarter!=null&&_year!=null)
+			return _kdRepository.findKeyDriversBySuburbQuarterYear(_quarter.longValue(), _year, _suburb, pageable);
+		else
+			return new PageImpl<ResidentialKD>(Collections.emptyList());
 	}
 
 	@Override

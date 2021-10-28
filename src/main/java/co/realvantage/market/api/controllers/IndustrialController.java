@@ -34,7 +34,7 @@ public class IndustrialController {
 	
 	@GetMapping("/IndustrialKI/query")
 	@CrossOrigin(origins="*")
-	public Page<IndustrialKI> getKeyIndicatorsBySuburdAndQuater(
+	public Page<IndustrialKI> getKeyIndicatorsBySuburdAndQuarter(
 			@RequestParam(name="country",required=false) String _country,
 			@RequestParam(name="state",required=false) String _state,
 			@RequestParam(name="suburb",required=false) String _suburb,

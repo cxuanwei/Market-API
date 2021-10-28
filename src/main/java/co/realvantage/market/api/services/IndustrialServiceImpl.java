@@ -173,15 +173,19 @@ public class IndustrialServiceImpl implements IndustrialService{
 		if(_country!=null&&_state!=null&_suburb!=null&&_quarter!=null&&_year!=null)
 			//_kiRepository.findKeyIndicatorsBySuburbQuarterYear(_quarter.longValue(), _year, _suburb, _page);
 			return _kiRepository.findKeyIndicatorsByCountryStateSuburbQuarterYear(_quarter.longValue(), _year, _suburb, _state, _country);
-
+		else if (_suburb!=null&&_quarter!=null&&_year!=null)
+			return _kiRepository.findKeyIndicatorsBySuburbQuarterYear(_quarter.longValue(), _year, _suburb);
 		return new ArrayList<IndustrialKI>();	//return any empty list
 	}
 
 	@Override
 	public Page<IndustrialKI> findKeyIndicatorsByCountryStateSuburbQuarterYear(String _country, String _state,
 			String _suburb, Integer _quarter, Year _year, Pageable pageable) {
-		if(_suburb!=null&&_quarter!=null&&_year!=null)
+		if(_country!=null&&_state!=null&_suburb!=null&&_quarter!=null&&_year!=null)
 			return _kiRepository.findKeyIndicatorsByCountryStateSuburbQuarterYear(_quarter.longValue(), _year, _suburb, _state, _country, pageable);
+		else if (_suburb!=null&&_quarter!=null&&_year!=null)
+			return _kiRepository.findKeyIndicatorsBySuburbQuarterYear(_quarter.longValue(), _year, _suburb, pageable);
+		else
 		return new PageImpl<IndustrialKI>(Collections.emptyList());
 	}
 
@@ -190,8 +194,10 @@ public class IndustrialServiceImpl implements IndustrialService{
 			Year _year) {
 		if(_country!=null&&_state!=null&&_quarter!=null&&_year!=null)
 			return _kdRepository.findKeyDriversByCountryStateQuarterYear(_quarter.longValue(), _year, _state, _country);
-
-		return new ArrayList<IndustrialKD>();	//return any empty list
+		else if (_state!=null&&_quarter!=null&&_year!=null)
+			return _kdRepository.findKeyDriversByStateQuarterYear(_quarter.longValue(), _year, _state);
+		else
+			return new ArrayList<IndustrialKD>();	//return any empty list
 	}
 
 	@Override
@@ -199,8 +205,10 @@ public class IndustrialServiceImpl implements IndustrialService{
 			Year _year, Pageable pageable) {
 		if(_country!=null&&_state!=null&&_quarter!=null&&_year!=null)
 			return _kdRepository.findKeyDriversByCountryStateQuarterYear(_quarter.longValue(), _year, _state, _country, pageable);
-		 
-		return new PageImpl<IndustrialKD>(Collections.emptyList());
+		else if (_state!=null&&_quarter!=null&&_year!=null)
+			return _kdRepository.findKeyDriversByStateQuarterYear(_quarter.longValue(), _year, _state, pageable);
+		else 
+			return new PageImpl<IndustrialKD>(Collections.emptyList());
 	}
 
 	@Override

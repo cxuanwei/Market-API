@@ -17,10 +17,10 @@ public interface OfficeKDRepository extends JpaRepository<OfficeKD, Long> {
 	@Query(value="SELECT * FROM officekd WHERE quarter=?1 AND year=?2 AND country ILIKE ?3 AND state ILIKE ?4 and suburb ILIKE ?5 and driver ILIKE ?6",nativeQuery=true)
 	public OfficeKD findByTimePeriodAndLocationAndDriver(long _quarter, Year _year, String _country, String _state, String _suburb, String _driver);
 	
-	@Query(value="SELECT * FROM officekd WHERE quarter=?1 AND year=?2 AND suburb ILIKE ?3",nativeQuery=true)
+	@Query(value="SELECT * FROM officekd WHERE quarter=?1 AND year=?2 AND suburb ILIKE %?3%",nativeQuery=true)
 	public Page<OfficeKD> findKeyDriversBySuburbQuarterYear(long _quarter, Year _year, String _suburb, Pageable page); 
 	
-	@Query(value="SELECT * FROM officekd WHERE quarter=?1 and year=?2 and suburb ILIKE ?3",nativeQuery=true)
+	@Query(value="SELECT * FROM officekd WHERE quarter=?1 and year=?2 and suburb ILIKE %?3%",nativeQuery=true)
 	public List<OfficeKD> findKeyDriversBySuburbQuarterYear(long _quarter, Year _year, String _suburb);
 	
 	@Query(value="SELECT * FROM officekd WHERE country  ILIKE  %?1% AND state  ILIKE %?2% AND quarter=?3 and year=?4 and suburb  ILIKE %?5%",nativeQuery=true)

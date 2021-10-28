@@ -25,13 +25,8 @@ public interface OfficeService {
 	public abstract void deleteKeyDriver(long id);
 	public abstract Collection<OfficeKD> findAllKeyDrivers();
 	public abstract Page<OfficeKD> findAllKeyDrivers(Pageable pageable);
-	public abstract OfficeKD findAllKeyDriversByQuarterAndLocationAndDriver(long _quarter, Year _year, String _country, String _state, String _suburb, String _driver);
 	
 	public abstract Office findAllDriversAndIndicators();
-	public abstract List<OfficeKI> findKeyIndicatorsBySuburbQuarterYear(String _suburb,Integer _quarter,Year _year);
-	public abstract Page<OfficeKI> findKeyIndicatorsBySuburbQuarterYear(String _suburb,Integer _quarter,Year _year, Pageable pageable);
-	public abstract List<OfficeKD> findKeyDriversBySuburbQuarterYear(String _suburb,Integer _quarter,Year _year);
-	public abstract Page<OfficeKD> findKeyDriversBySuburbQuarterYear(String _suburb,Integer _quarter,Year _year, Pageable pageable);
 	public abstract List<OfficeKI> findKeyIndicatorsByCountryStateSuburbQuarterYear(String _country, String _state, String _suburb,Integer _quarter,Year _year);
 	public abstract Page<OfficeKI> findKeyIndicatorsByCountryStateSuburbQuarterYear(String _country, String _state, String _suburb,Integer _quarter,Year _year, Pageable pageable);
 	public abstract List<OfficeKD> findKeyDriversByCountryStateSuburbQuarterYear(String _country, String _state, String _suburb,Integer _quarter,Year _year);

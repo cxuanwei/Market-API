@@ -34,7 +34,7 @@ public class RetailController {
 	
 	@GetMapping("/RetailKI/query")
 	@CrossOrigin(origins="*")
-	public Page<RetailKI> getKeyIndicatorsBySuburdQuarterYear(
+	public Page<RetailKI> getKeyIndicatorsByStateQuarterYear(
 			@RequestParam(name="state",required=false) String _state,
 			@RequestParam(name="quarter",required=false) Integer _quarter,
 			@RequestParam(name="year",required=false) Year _year,
@@ -74,12 +74,13 @@ public class RetailController {
 	@GetMapping("/RetailKD/query")
 	@CrossOrigin(origins="*")
 	public Page<RetailKD> getKeyDriversBySuburdQuarterYear(
+			@RequestParam(name="country",required=false) String _country,
 			@RequestParam(name="state",required=false) String _state,
 			@RequestParam(name="quarter",required=false) Integer _quarter,
 			@RequestParam(name="year",required=false) Year _year,
 			Pageable pageable
 			)	{
-		return _service.findKeyDriversByStateQuarterYear(_state, _quarter, _year, pageable);
+		return _service.findKeyDriversByCountryStateQuarterYear(_country, _state, _quarter, _year, pageable);
 	}
 	
 	@PostMapping("/RetailKD")
