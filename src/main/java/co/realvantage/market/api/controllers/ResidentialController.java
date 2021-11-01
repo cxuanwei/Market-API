@@ -123,8 +123,7 @@ public class ResidentialController {
 			@RequestParam(name="country",required=false) String _country,
 			@RequestParam(name="suburb",required=false) String _suburb,
 			@RequestParam(name="quarter",required=false) Integer _quarter,
-			@RequestParam(name="year",required=false) Year _year,
-			Pageable pageable
+			@RequestParam(name="year",required=false) Year _year
 			)	{
 		ResidentialKD residentialKD = _service.findKeyDriverByKDSuburbCountryQuarterYear(_kd, _suburb, _country, _quarter, _year);
 		if(residentialKD!=null)
